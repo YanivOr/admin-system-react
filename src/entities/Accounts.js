@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Title } from '../common/Common';
 
-const Wrapper = styled.div`
-
-`;
+const Wrapper = styled.div``;
 
 const Accounts = () => {
   return (
     <Wrapper>
-      Accounts
+      <Title>Accounts</Title>
     </Wrapper>
   );
 }
