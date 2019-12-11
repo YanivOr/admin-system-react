@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Title } from '../common/Common';
+import { Title } from '../layout/Common';
 
 const Wrapper = styled.div``;
 
 const Posts = () => {
   return (
     <Wrapper>
-      <Title>Post</Title>
+      <Title>Posts</Title>
     </Wrapper>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Title } from '../common/Common';
+import { Title } from '../layout/Common';
 
 const Wrapper = styled.div``;
 
