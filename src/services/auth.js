@@ -2,15 +2,13 @@ const authenticate = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(true);
-    }, 2000);
+    }, 1000);
   });
 }
 
-const validateToken = (token, pathname, source) => {
+const validateToken = (token) => {
   // If token exists and its length is correct
-  // Also, if validate URL token, the pathname must be root
-  // Else - if localStorage token - the pathname can be anything
-  if(token && token.length > 256 && !(source === 'url' && pathname !== '/')) {
+  if(token && token.length > 256) {
     return new Promise(async (resolve, reject) => {
       const authResults = await authenticate();
       if (authResults) {
@@ -23,29 +21,36 @@ const validateToken = (token, pathname, source) => {
 
 const checkAuth = async (props) => {
   const {location: {search, pathname}} = props;
-  let token;
 
   return new Promise(async (resolve) => {
     // Get token from localStorage
-    token = localStorage.getItem('token');
-    const resultsLocalStorage = await validateToken(token, pathname, 'storage');
-
-    if (resultsLocalStorage) {
-      resolve({
-        redirect: pathname !== '/',
-        isTokenValid: resultsLocalStorage
-      });
-    }
+    const tokenLocalStorage = localStorage.getItem('token');
 
     // Get token from url
     const url = new URL(`http://p.holder/${search}`);
-    token = url.searchParams.get('token');
-    const resultsUrl = await validateToken(token, pathname, 'url');
+    const tokenUrl = url.searchParams.get('token');
 
-    resolve({
-      redirect: pathname !== '/',
-      isTokenValid: resultsUrl
-    });
+    // Validate localStorage token
+    if(tokenLocalStorage) {
+      const resultsLocalStorage = await validateToken(tokenLocalStorage);
+
+      if (resultsLocalStorage) {
+        resolve({
+          redirect: !!tokenUrl,
+          isTokenValid: resultsLocalStorage
+        });
+      }
+    }
+
+    // Validate URL token
+    if (tokenUrl && pathname === '/') {
+      const resultsUrl = await validateToken(tokenUrl, pathname);
+
+      resolve({
+        redirect: !!tokenUrl,
+        isTokenValid: resultsUrl
+      });
+    }
   });
 }
 
