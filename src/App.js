@@ -14,7 +14,16 @@ const CustomRoute = (props) => {
   const {isValid, setState} = props;
 
   (async () => {
-    await checkAuth(props) ? setState(true) : setState(false);
+    const {redirect, isTokenValid} = await checkAuth(props);
+    console.log(redirect, isTokenValid);
+
+    /*
+    if (authResults) {
+      
+    }
+    */
+    
+    //? setState(true) : setState(false);
   })();
 
   if(!isValid) {

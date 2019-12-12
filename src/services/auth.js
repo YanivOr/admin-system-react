@@ -30,12 +30,22 @@ const checkAuth = async (props) => {
     token = localStorage.getItem('token');
     const resultsLocalStorage = await validateToken(token, pathname, 'storage');
 
+    if (resultsLocalStorage) {
+      resolve({
+        redirect: pathname !== '/',
+        isTokenValid: resultsLocalStorage
+      });
+    }
+
     // Get token from url
     const url = new URL(`http://p.holder/${search}`);
     token = url.searchParams.get('token');
     const resultsUrl = await validateToken(token, pathname, 'url');
 
-    resolve(resultsLocalStorage || resultsUrl);
+    resolve({
+      redirect: pathname !== '/',
+      isTokenValid: resultsUrl
+    });
   });
 }
 
