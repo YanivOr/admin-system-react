@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Title } from '../layout/Common';
+import { Sticker } from '../layout/Common';
 
 const Wrapper = styled.div``;
 
 const Accounts = () => {
   return (
     <Wrapper>
-      <Title>Accounts</Title>
+      <Sticker>Accounts</Sticker>
     </Wrapper>
   );
-}
+} 
 
 export default Accounts;

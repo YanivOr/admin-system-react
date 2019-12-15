@@ -30,7 +30,7 @@ const Li = styled.li`
   & > a {
     display: block;
     text-decoration: none;
-    color: #333333;
+    color: #222222;
   }
 `;
 

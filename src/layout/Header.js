@@ -8,7 +8,6 @@ const Wrapper = styled.div`
   background: #333333;
   color: #dddddd;
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  border-bottom: 1px solid #980000;
 `;
 
 const MenuIcon = styled.img`

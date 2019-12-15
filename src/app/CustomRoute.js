@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   Redirect
 } from "react-router-dom";
-import Layout from './layout/Layout';
-import Dashboard from './layout/Dashboard';
-import Loading from './layout/Loading';
-import Accounts from './entities/Accounts';
-import Posts from './entities/Posts';
-import { checkAuth } from './services/auth';
+import Layout from '../layout/Layout';
+import Dashboard from '../layout/Dashboard';
+import Loading from '../layout/Loading';
+import Accounts from '../entities/Accounts';
+import Posts from '../entities/Posts';
+import { checkAuth } from '../services/auth';
 
 const initialState = {
   INIT: 'init',
@@ -19,20 +18,21 @@ const initialState = {
 };
 
 const CustomRoute = (props) => {
-  const {isValid, setState} = props;
   const {INIT, ROUTE, REDIRECT} = initialState;
+
+  const {isValid, setRoute} = props;
 
   (async () => {
     const {redirect, isTokenValid} = await checkAuth(props);
 
     if (isTokenValid && !redirect) {
-      setState(ROUTE);
+      setRoute(ROUTE);
     }
     else if (isTokenValid && redirect) {
-      setState(REDIRECT);
+      setRoute(REDIRECT);
     }
     else {
-      setState(INIT);
+      setRoute(INIT);
     }
   })();
 
@@ -67,18 +67,7 @@ const CustomRoute = (props) => {
   }
 };
 
-const App = () => {
-  const [isValid, setState] = useState(initialState.INIT);
-
-  return (
-    <Router>
-      <Switch>
-        <CustomRoute
-          isValid={isValid}
-          setState={setState}></CustomRoute>
-       </Switch>
-    </Router>
-  );
-}
-
-export default App;
+export {
+  CustomRoute,
+  initialState,
+};
