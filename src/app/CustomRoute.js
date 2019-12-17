@@ -1,43 +1,43 @@
-import React from "react";
+import React from "react"
 import {
   Switch,
   Route,
   Redirect
-} from "react-router-dom";
-import Layout from '../layout/Layout';
-import Dashboard from '../layout/Dashboard';
-import Loading from '../layout/Loading';
-import Accounts from '../entities/Accounts';
-import Posts from '../entities/Posts';
-import { checkAuth } from '../services/auth';
+} from "react-router-dom"
+import Layout from '../layout/Layout'
+import Dashboard from '../layout/Dashboard'
+import Loading from '../layout/Loading'
+import Accounts from '../entities/Accounts'
+import Posts from '../entities/Posts'
+import { checkAuth } from '../services/auth'
 
 const initialState = {
   INIT: 'init',
   ROUTE: 'route',
   REDIRECT: 'redirect',
-};
+}
 
 const CustomRoute = (props) => {
-  const {INIT, ROUTE, REDIRECT} = initialState;
+  const {INIT, ROUTE, REDIRECT} = initialState
 
-  const {isValid, setRoute} = props;
+  const {isValid, setRoute} = props
 
-  (async () => {
-    const {redirect, isTokenValid} = await checkAuth(props);
+  ;(async () => {
+    const {redirect, isTokenValid} = await checkAuth(props)
 
     if (isTokenValid && !redirect) {
-      setRoute(ROUTE);
+      setRoute(ROUTE)
     }
     else if (isTokenValid && redirect) {
-      setRoute(REDIRECT);
+      setRoute(REDIRECT)
     }
     else {
-      setRoute(INIT);
+      setRoute(INIT)
     }
-  })();
+  })()
 
   if (isValid === INIT) {
-    return <Loading>Loading...</Loading>;
+    return <Loading>Loading...</Loading>
   }
   else if (isValid === ROUTE) {
     return (
@@ -58,16 +58,16 @@ const CustomRoute = (props) => {
           </Layout>
         </Route>
       </Switch>
-    );
+    )
   }
   else if (isValid === REDIRECT) {
     return (
       <Redirect to="/" />
-    );
+    )
   }
-};
+}
 
 export {
   CustomRoute,
   initialState,
-};
+}

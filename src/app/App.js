@@ -1,25 +1,25 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import {
   BrowserRouter as Router,
   Switch,
-} from "react-router-dom";
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { CustomRoute, initialState } from './CustomRoute';
+} from "react-router-dom"
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import { CustomRoute, initialState } from './CustomRoute'
 import rootReducer from '../reducers/'
 
 const App = () => {
-  const [isValid, setState] = useState(initialState.INIT);
+  const [isValid, setState] = useState(initialState.INIT)
 
   const setRoute = route => {
     setState(route);
-  };
+  }
 
   const store = createStore(
     rootReducer,
     composeWithDevTools()
-  );
+  )
 
   return (
     <Provider store={store}>
@@ -32,7 +32,7 @@ const App = () => {
         </Switch>
       </Router>
     </Provider>
-  );
+  )
 }
 
-export default App;
+export default App

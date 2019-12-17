@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Sticker = styled.span`
   padding: 5px 15px;
@@ -11,8 +11,8 @@ const Sticker = styled.span`
   &:hover {
     background: #cccccc;
   }
-`;
+`
 
 export {
   Sticker,
-};
+}
