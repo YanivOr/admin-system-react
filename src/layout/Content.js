@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const Wrapper = styled.div`
   flex: auto;
@@ -8,14 +8,14 @@ const Wrapper = styled.div`
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   margin: 20px;
   padding: 20px;
-`;
+`
 
 const Content = ({children}) => {
   return (
     <Wrapper>
       {children}
     </Wrapper>
-  );
+  )
 }
 
-export default Content;
+export default Content

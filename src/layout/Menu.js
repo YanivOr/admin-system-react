@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from 'styled-components';
+import React from "react"
+import { Link } from "react-router-dom"
+import styled from 'styled-components'
 
 const Nav = styled.nav`
   position: fixed;
@@ -8,13 +8,13 @@ const Nav = styled.nav`
   left: ${({isVisible}) => isVisible ? '30px' : '-270px'};
   transition: left 0.5s;
   width: 250px;
-`;
+`
 
 const Ul = styled.ul`
   list-style-type: none;
   padding: 0px;
   margin: 0px;
-`;
+`
 
 const Li = styled.li`
   padding: 5px;
@@ -32,8 +32,7 @@ const Li = styled.li`
     text-decoration: none;
     color: #222222;
   }
-`;
-
+`
 
 const Menu = ({isVisible, btnClicked}) => {
   return (
@@ -51,7 +50,7 @@ const Menu = ({isVisible, btnClicked}) => {
         </Li>
       </Ul>
     </Nav>
-  );
+  )
 }
 
-export default Menu;
+export default Menu

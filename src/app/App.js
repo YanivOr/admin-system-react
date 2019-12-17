@@ -3,11 +3,9 @@ import {
   BrowserRouter as Router,
   Switch,
 } from "react-router-dom"
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import configureStore from '../store/configureStore'
 import { CustomRoute, initialState } from './CustomRoute'
-import rootReducer from '../reducers/'
 
 const App = () => {
   const [isValid, setState] = useState(initialState.INIT)
@@ -16,10 +14,7 @@ const App = () => {
     setState(route);
   }
 
-  const store = createStore(
-    rootReducer,
-    composeWithDevTools()
-  )
+  const store = configureStore()
 
   return (
     <Provider store={store}>

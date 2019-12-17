@@ -1,5 +1,5 @@
-import React from "react";
-import styled from 'styled-components';
+import React from "react"
+import styled from 'styled-components'
 
 const Wrapper = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   background: #333333;
   width: 100%;
   height: 100%;
-`;
+`
 
 const Gif = styled.img`
   width: 200px;
@@ -24,14 +24,14 @@ const Gif = styled.img`
         transform: rotate(360deg); 
     }
   }
-`;
+`
 
 const Loading = () => {
   return (
     <Wrapper>
       <Gif src={require("../assets/loading-1.png")}></Gif>
     </Wrapper>
-  );
+  )
 }
 
-export default Loading;
+export default Loading

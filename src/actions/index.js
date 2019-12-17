@@ -21,7 +21,7 @@ export const VisibilityFilters = {
   SHOW_ACTIVE: 'SHOW_ACTIVE'
 }
 
-export const setRoute = id => ({
-    type: 'SET_ROUTE',
-    id
+export const getAccounts = data => ({
+  type: 'GET_ACCOUNTS',
+  data
 })

@@ -1,5 +1,5 @@
-import React from "react";
-import styled from 'styled-components';
+import React from "react"
+import styled from 'styled-components'
 
 const Wrapper = styled.div`
   margin: 0 auto 20px auto;
@@ -8,14 +8,14 @@ const Wrapper = styled.div`
   background: #333333;
   color: #dddddd;
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-`;
+`
 
 const Footer = () => {
   return (
     <Wrapper>
 
     </Wrapper>
-  );
+  )
 }
 
-export default Footer;
+export default Footer

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import todos from './todos';
-import routes from './routes';
+import accounts from './accounts';
 
 export default combineReducers({
   todos,
-  routes,
+  accounts,
 });

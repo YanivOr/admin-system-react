@@ -1,44 +1,44 @@
-import React, { useState } from "react";
-import styled from 'styled-components';
-import Header from '../layout/Header';
-import Footer from '../layout/Footer';
-import Menu from '../layout/Menu';
-import Content from '../layout/Content';
+import React, { useState } from "react"
+import styled from 'styled-components'
+import Header from '../layout/Header'
+import Footer from '../layout/Footer'
+import Menu from '../layout/Menu'
+import Content from '../layout/Content'
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-`;
+`
 
 const initialState = {
   menu: {
     isVisible: false,
   },
-};
+}
 
 const Layout = ({children}) => {
 
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState(initialState)
 
   const menuBtnClicked = () => {
-    let newState;
+    let newState
 
-    newState = {...state};
-    newState.menu.isVisible = !state.menu.isVisible;
+    newState = {...state}
+    newState.menu.isVisible = !state.menu.isVisible
 
-    setState(newState);
-  };
+    setState(newState)
+  }
 
   const menuItemClicked = () => {
-    let newState;
+    let newState
 
-    newState = {...state};
-    newState.menu.isVisible = false;
+    newState = {...state}
+    newState.menu.isVisible = false
 
-    setState(newState);
-  };
+    setState(newState)
+  }
 
   return (
       <Wrapper>
@@ -54,7 +54,7 @@ const Layout = ({children}) => {
         </Content>
         <Footer></Footer>
       </Wrapper>
-  );
+  )
 }
 
-export default Layout;
+export default Layout

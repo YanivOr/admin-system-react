@@ -1,11 +1,11 @@
-const routes = (state = [], action) => {
+const accounts = (state = [], action) => {
   switch (action.type) {
-    case 'SET_ROUTE':
+    case 'GET_ACCOUNTS':
       return [
         ...state,
         {
-          id: action.id,
-          text: action.text,
+          id: 123,
+          text: 'ygygygy',
           completed: false
         }
       ]
@@ -14,4 +14,4 @@ const routes = (state = [], action) => {
   }
 }
 
-export default routes
+export default accounts
