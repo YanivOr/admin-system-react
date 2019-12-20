@@ -6,16 +6,16 @@ const {
   GET_ACCOUNTS_STARTED, 
   GET_ACCOUNTS_FAILURE } = types
 
-export const getAccounts = data => {
+export const getAccounts = () => {
   return dispatch => {
     dispatch(getAccountsStarted())
 
+    const token = localStorage.getItem('token')
+    const AuthStr = 'Bearer '.concat(token)
+
     axios
-      .post(`https://jsonplaceholder.typicode.com/todos`, {
-        title: 'title123',
-        userId: '12i2i2u3',
-        completed: false
-      })
+      .get(`http://127.0.0.1:3001/accounts`, 
+          { headers: { Authorization: AuthStr } })
       .then(res => {
         dispatch(getAccountsSuccess(res.data))
       })
