@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { 
-  GET_ACCOUNTS_SUCCESS, 
-  GET_ACCOUNTS_STARTED, 
-  GET_ACCOUNTS_FAILURE 
+  GET_POSTS_SUCCESS, 
+  GET_POSTS_STARTED, 
+  GET_POSTS_FAILURE 
 } from './constants'
 
 export const getPosts = () => {
@@ -25,18 +25,18 @@ export const getPosts = () => {
 }
 
 const getPostsSuccess = item => ({
-  type: GET_ACCOUNTS_SUCCESS,
+  type: GET_POSTS_SUCCESS,
   payload: {
     ...item
   }
 })
 
 const getPostsStarted = () => ({
-  type: GET_ACCOUNTS_STARTED
+  type: GET_POSTS_STARTED
 })
 
 const getPostsFailure = error => ({
-  type: GET_ACCOUNTS_FAILURE,
+  type: GET_POSTS_FAILURE,
   payload: {
     error
   }
