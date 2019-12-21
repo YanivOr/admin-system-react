@@ -25,7 +25,7 @@ const Header = ({btnClicked}) => {
     <Wrapper>
       <MenuIcon
         onClick={btnClicked}
-        src={require(`../assets/menu-24px.svg`)}>
+        src={require(`../../assets/menu-24px.svg`)}>
       </MenuIcon>
     </Wrapper>
   )

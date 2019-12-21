@@ -1,15 +1,16 @@
-import types from '../actions/types'
-
-const { 
-  GET_ACCOUNTS_SUCCESS, 
-  GET_ACCOUNTS_STARTED, 
-  GET_ACCOUNTS_FAILURE } = types
+import {
+  GET_ACCOUNTS_SUCCESS,
+  GET_ACCOUNTS_STARTED,
+  GET_ACCOUNTS_FAILURE
+} from '../../actions/accounts/constants'
 
 const accounts = (state = [], action) => {
   switch (action.type) {
     case GET_ACCOUNTS_SUCCESS:
+      const {rows} = action.payload
+
       return [
-        ...state
+        ...rows
       ]
     case GET_ACCOUNTS_STARTED:
       return [

@@ -1,10 +1,9 @@
 import axios from 'axios'
-import types from './types'
-
-const { 
+import { 
   GET_ACCOUNTS_SUCCESS, 
   GET_ACCOUNTS_STARTED, 
-  GET_ACCOUNTS_FAILURE } = types
+  GET_ACCOUNTS_FAILURE 
+} from './constants'
 
 export const getPosts = () => {
   return dispatch => {
@@ -25,10 +24,10 @@ export const getPosts = () => {
   }
 }
 
-const getPostsSuccess = todo => ({
+const getPostsSuccess = item => ({
   type: GET_ACCOUNTS_SUCCESS,
   payload: {
-    ...todo
+    ...item
   }
 })
 

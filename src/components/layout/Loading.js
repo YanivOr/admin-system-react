@@ -29,7 +29,7 @@ const Gif = styled.img`
 const Loading = () => {
   return (
     <Wrapper>
-      <Gif src={require("../assets/loading-1.png")}></Gif>
+      <Gif src={require("../../assets/loading-1.png")}></Gif>
     </Wrapper>
   )
 }
