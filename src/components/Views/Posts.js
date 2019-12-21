@@ -1,23 +1,39 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { getPosts } from '../../actions/posts'
 import { Sticker } from '../Common/Sticker'
-import { getPosts } from '../../actions/posts/index'
+import Table from '../Common/Table'
 
 const Wrapper = styled.div``
 
-const Posts = ({dispatch}) => {
+const Posts = ({state, getPosts}) => {
+  const {posts} = state
 
-  const clicked = () => {
-    dispatch(getPosts())
-  }
-  
+  const schema = [
+    'id',
+    'title',
+    'content',
+    'tags',
+    'thumbnail',
+    'createdAt',
+    'updatedAt',
+  ]
+
   return (
     <Wrapper>
-      <Sticker
-        onClick={clicked}>Posts</Sticker>
+      <Sticker onClick={getPosts}>Posts</Sticker>
+      <Table
+        schema={schema}
+        data={posts}/>
     </Wrapper>
   )
-} 
+}
 
-export default connect()(Posts)
+const mapStateToProps = state => ({
+  state: state
+});
+
+const mapDispatchToProps = { getPosts }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Posts)
