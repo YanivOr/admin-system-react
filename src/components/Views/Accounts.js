@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { Sticker } from '../layout/Common'
+import { Sticker } from '../Common/Sticker'
 import { getAccounts } from '../../actions/accounts/index'
 
 const Wrapper = styled.div``

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Sticker } from './Common'
+import { Sticker } from '../Common/Sticker'
 
 const Wrapper = styled.div``
 

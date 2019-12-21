@@ -4,11 +4,11 @@ import {
   Route,
   Redirect
 } from "react-router-dom"
-import Layout from '../components/layout/Layout'
-import Dashboard from '../components/layout/Dashboard'
-import Loading from '../components/layout/Loading'
-import Accounts from '../components/entities/Accounts'
-import Posts from '../components/entities/Posts'
+import Layout from '../components/Layout'
+import Loading from '../components/Common/Loading'
+import Dashboard from '../components/Views/Dashboard'
+import Accounts from '../components/Views/Accounts'
+import Posts from '../components/Views/Posts'
 import { checkAuth } from '../services/auth'
 
 const initialState = {

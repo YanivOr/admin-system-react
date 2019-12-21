@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import styled from 'styled-components'
-import Header from '../layout/Header'
-import Footer from '../layout/Footer'
-import Menu from '../layout/Menu'
-import Content from '../layout/Content'
+import Header from './Header'
+import Footer from './Footer'
+import Menu from '../General/Menu'
+import Content from './Content'
 
 const Wrapper = styled.div`
   display: flex;
