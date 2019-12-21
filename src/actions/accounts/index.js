@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { API_ACCOUNTS } from '../../config'
 import {
   GET_ACCOUNTS_SUCCESS,
   GET_ACCOUNTS_STARTED,
@@ -13,7 +14,7 @@ export const getAccounts = () => {
     const AuthStr = 'Bearer '.concat(token)
 
     axios
-      .get(`http://127.0.0.1:3001/accounts`, 
+      .get(API_ACCOUNTS, 
           { headers: { Authorization: AuthStr } })
       .then(res => {
         dispatch(getAccountsSuccess(res.data))

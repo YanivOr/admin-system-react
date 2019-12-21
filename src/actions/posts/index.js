@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { API_POSTS } from '../../config'
 import { 
   GET_POSTS_SUCCESS, 
   GET_POSTS_STARTED, 
@@ -13,7 +14,7 @@ export const getPosts = () => {
     const AuthStr = 'Bearer '.concat(token)
 
     axios
-      .get(`http://127.0.0.1:3002/posts`, 
+      .get(API_POSTS, 
           { headers: { Authorization: AuthStr } })
       .then(res => {
         dispatch(getPostsSuccess(res.data))
