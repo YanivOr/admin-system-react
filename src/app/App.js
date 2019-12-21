@@ -1,14 +1,15 @@
-import React, { useState } from "react"
+import React, { useState } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
-} from "react-router-dom"
+} from 'react-router-dom'
 import { Provider } from 'react-redux'
 import configureStore from '../store/configureStore'
-import { CustomRoute, initialState } from './CustomRoute'
+import CustomRoute from './CustomRoute'
+import { INIT } from './constants'
 
 const App = () => {
-  const [isValid, setState] = useState(initialState.INIT)
+  const [isValid, setState] = useState(INIT)
 
   const setRoute = route => {
     setState(route);

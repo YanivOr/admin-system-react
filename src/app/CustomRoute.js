@@ -1,25 +1,18 @@
-import React from "react"
+import React from 'react'
 import {
   Switch,
   Route,
   Redirect
-} from "react-router-dom"
+} from 'react-router-dom'
 import Layout from '../components/Layout'
 import Loading from '../components/Common/Loading'
 import Dashboard from '../components/Views/Dashboard'
 import Accounts from '../components/Views/Accounts'
 import Posts from '../components/Views/Posts'
 import { checkAuth } from '../services/auth'
-
-const initialState = {
-  INIT: 'init',
-  ROUTE: 'route',
-  REDIRECT: 'redirect',
-}
+import { INIT, ROUTE, REDIRECT } from './constants'
 
 const CustomRoute = (props) => {
-  const {INIT, ROUTE, REDIRECT} = initialState
-
   const {isValid, setRoute} = props
 
   ;(async () => {
@@ -67,7 +60,4 @@ const CustomRoute = (props) => {
   }
 }
 
-export {
-  CustomRoute,
-  initialState,
-}
+export default CustomRoute
