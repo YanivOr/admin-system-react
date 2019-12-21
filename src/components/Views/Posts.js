@@ -1,39 +1,31 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
+import schema from '../../reducers/posts/schema'
 import { getPosts } from '../../actions/posts'
-import { Sticker } from '../Common/Sticker'
-import Table from '../Common/Table'
+import Entity from './Entity'
 
 const Wrapper = styled.div``
 
-const Posts = ({state, getPosts}) => {
+const Posts = () => {
+  const state = useSelector(state => state)
+  const dispatch = useDispatch()
   const {posts} = state
+  const title = 'Posts'
 
-  const schema = [
-    'id',
-    'title',
-    'content',
-    'tags',
-    'thumbnail',
-    'createdAt',
-    'updatedAt',
-  ]
+  useEffect(() => {
+    dispatch(getPosts())
+  }, [dispatch])
 
   return (
     <Wrapper>
-      <Sticker onClick={getPosts}>Posts</Sticker>
-      <Table
+      <Entity
+        title={title}
         schema={schema}
-        data={posts}/>
+        data={posts}
+      />
     </Wrapper>
   )
 }
 
-const mapStateToProps = state => ({
-  state: state
-});
-
-const mapDispatchToProps = { getPosts }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Posts)
+export default Posts

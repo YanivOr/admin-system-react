@@ -1,41 +1,31 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
+import schema from '../../reducers/accounts/schema'
 import { getAccounts } from '../../actions/accounts'
-import { Sticker } from '../Common/Sticker'
-import Table from '../Common/Table'
+import Entity from './Entity'
 
 const Wrapper = styled.div``
 
-const Accounts = ({state, getAccounts}) => {
+const Accounts = () => {
+  const state = useSelector(state => state)
+  const dispatch = useDispatch()
   const {accounts} = state
+  const title = 'Accounts'
 
-  const schema = [
-    'id',
-    'username',
-    'phone',
-    'email',
-    'roles',
-    'enabledActions',
-    'disabledActions',
-    'createdAt',
-    'updatedAt',
-  ]
+  useEffect(() => {
+    dispatch(getAccounts())
+  }, [dispatch])
 
   return (
     <Wrapper>
-      <Sticker onClick={getAccounts}>Accounts</Sticker>
-      <Table
+      <Entity
+        title={title}
         schema={schema}
-        data={accounts}/>
+        data={accounts}
+      />
     </Wrapper>
   )
 }
 
-const mapStateToProps = state => ({
-  state: state
-});
-
-const mapDispatchToProps = { getAccounts }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Accounts)
+export default Accounts
