@@ -9,7 +9,7 @@ import CustomRoute from './CustomRoute'
 import { INIT } from './constants'
 
 const App = () => {
-  const [isValid, setState] = useState(INIT)
+  const [routeState, setState] = useState(INIT)
 
   const setRoute = route => {
     setState(route);
@@ -22,9 +22,9 @@ const App = () => {
       <Router>
         <Switch>
           <CustomRoute
-            isValid={isValid}
+            routeState={routeState}
             setRoute={setRoute}
-            setState={setState}></CustomRoute>
+          />
         </Switch>
       </Router>
     </Provider>

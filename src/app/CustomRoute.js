@@ -12,50 +12,52 @@ import Posts from '../components/Views/Posts'
 import { checkAuth } from '../services/auth'
 import { INIT, ROUTE, REDIRECT } from './constants'
 
-const CustomRoute = (props) => {
-  const {isValid, setRoute} = props
+const redirectByAuth = async (props) => {
+  const {setRoute} = props
+  const {redirect, isTokenValid} = await checkAuth(props)
 
-  ;(async () => {
-    const {redirect, isTokenValid} = await checkAuth(props)
-
-    if (isTokenValid && !redirect) {
-      setRoute(ROUTE)
-    }
-    else if (isTokenValid && redirect) {
-      setRoute(REDIRECT)
-    }
-    else {
-      setRoute(INIT)
-    }
-  })()
-
-  if (isValid === INIT) {
-    return <Loading>Loading...</Loading>
+  if (isTokenValid && !redirect) {
+    setRoute(ROUTE)
   }
-  else if (isValid === ROUTE) {
+  else if (isTokenValid && redirect) {
+    setRoute(REDIRECT)
+  }
+  else {
+    setRoute(INIT)
+  }
+}
+
+const CustomRoute = (props) => {
+  const {routeState} = props
+  redirectByAuth(props)
+
+  if (routeState === INIT) {
+    return <Loading/>
+  }
+  else if (routeState === ROUTE) {
     return (
       <Switch>
         <Route path="/accounts">
           <Layout>
-            <Accounts></Accounts>
+            <Accounts/>
           </Layout>
         </Route>
         <Route path="/posts">
           <Layout>
-            <Posts></Posts>
+            <Posts/>
           </Layout>
         </Route>
         <Route path="/">
           <Layout>
-            <Dashboard></Dashboard>
+            <Dashboard/>
           </Layout>
         </Route>
       </Switch>
     )
   }
-  else if (isValid === REDIRECT) {
+  else if (routeState === REDIRECT) {
     return (
-      <Redirect to="/" />
+      <Redirect to="/"/>
     )
   }
 }
