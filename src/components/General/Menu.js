@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import styled from 'styled-components'
 
-const Nav = styled.nav`
+const Wrapper = styled.div`
   position: fixed;
   top: 100px;
   left: ${({isVisible}) => isVisible ? '30px' : '-270px'};
@@ -36,7 +36,7 @@ const Li = styled.li`
 
 const Menu = ({isVisible, btnClicked}) => {
   return (
-    <Nav
+    <Wrapper
       isVisible={isVisible}>
       <Ul>
         <Li onClick={btnClicked}>
@@ -49,7 +49,7 @@ const Menu = ({isVisible, btnClicked}) => {
           <Link to="/posts">Posts</Link>
         </Li>
       </Ul>
-    </Nav>
+    </Wrapper>
   )
 }
 
