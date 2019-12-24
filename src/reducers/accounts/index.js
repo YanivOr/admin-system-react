@@ -10,6 +10,7 @@ const accounts = (state = [], action) => {
       const {rows} = action.payload
 
       return [
+        ...state,
         ...rows
       ]
     case GET_ACCOUNTS_STARTED:
