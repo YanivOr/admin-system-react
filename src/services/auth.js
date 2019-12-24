@@ -1,3 +1,9 @@
+import { storageSet, storageGet } from './storage'
+
+const authHeader = () => {
+  return `Bearer ${storageGet('token')}`
+}
+
 const authenticate = () => {
   return new Promise((resolve, reject) => {
     resolve(true)
@@ -10,7 +16,7 @@ const validateToken = (token) => {
     return new Promise(async (resolve, reject) => {
       const authResults = await authenticate()
       if (authResults) {
-        localStorage.setItem('token', token)
+        storageSet('token', token)
       }
       resolve(authResults)
     })
@@ -22,7 +28,7 @@ const checkAuth = async (props) => {
 
   return new Promise(async (resolve) => {
     // Get token from localStorage
-    const tokenLocalStorage = localStorage.getItem('token')
+    const tokenLocalStorage = storageGet('token')
 
     // Get token from url
     const url = new URL(`http://p.holder/${search}`)
@@ -53,5 +59,6 @@ const checkAuth = async (props) => {
 }
 
 export {
-  checkAuth
+  checkAuth,
+  authHeader,
 }

@@ -5,17 +5,15 @@ import {
   GET_ACCOUNTS_STARTED,
   GET_ACCOUNTS_FAILURE
 } from './constants'
+import { authHeader } from '../../services/auth'
 
 export const getAccounts = () => {
   return dispatch => {
     dispatch(getAccountsStarted())
 
-    const token = localStorage.getItem('token')
-    const AuthStr = 'Bearer '.concat(token)
-
     axios
       .get(API_ACCOUNTS, 
-          { headers: { Authorization: AuthStr } })
+          { headers: { Authorization: authHeader() } })
       .then(res => {
         dispatch(getAccountsSuccess(res.data))
       })
@@ -25,10 +23,10 @@ export const getAccounts = () => {
   }
 }
 
-const getAccountsSuccess = item => ({
+const getAccountsSuccess = data => ({
   type: GET_ACCOUNTS_SUCCESS,
   payload: {
-    ...item
+    ...data
   }
 })
 
