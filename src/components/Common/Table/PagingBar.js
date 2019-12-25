@@ -1,6 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Sticker } from '../Sticker'
+import {
+  GO_TO_FIRST_PAGE,
+  GO_TO_PREV_PAGE,
+  GO_TO_NEXT_PAGE,
+  GO_TO_LAST_PAGE,
+  REFRESH,
+} from './constants'
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,8 +40,9 @@ const PageInput = styled.input`
   background: #cccccc;
   color: #222222;
   font-weight: bold;
-  width: 50px;
+  width: 60px;
   height: 33px;
+  text-align: center;
   border: 0px;
   padding: 0px 10px;
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
@@ -57,34 +65,40 @@ const PageDropdown = styled.select`
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 `
 
-const PagingBar = ({btnClicked}) => {
+const Option = styled.option``
 
-
-  return (
-    <Wrapper>
-      <GoToStartButton
-        onClick={btnClicked('goToStart')}
-        src={require(`../../../assets/first_page-24px.svg`)}/>
-      <GoToPrevButton
-        onClick={btnClicked('goToPrev')}
-        src={require(`../../../assets/chevron_left-24px.svg`)}/>
-      <Sticker>Page</Sticker>
-      <PageInput
-        type="text"/>
-      <Sticker>of</Sticker>
-      <Sticker>24</Sticker>
-      <GoToNextButton
-        onClick={btnClicked('goToNext')}
-        src={require(`../../../assets/chevron_right-24px.svg`)}/>
-      <GoToLastButton
-        onClick={btnClicked('goToLast')}
-        src={require(`../../../assets/last_page-24px.svg`)}/>
-      <RefreshButton
-        onClick={btnClicked('refresh')}
-        src={require(`../../../assets/refresh-24px.svg`)}/>
-      <PageDropdown/>
-    </Wrapper>
-  )
-}
+const PagingBar = ({page, pagesCount, changePage}) => (
+  <Wrapper>
+    <GoToStartButton
+      onClick={changePage.bind(this, GO_TO_FIRST_PAGE)}
+      src={require(`../../../assets/first_page-24px.svg`)}/>
+    <GoToPrevButton
+      onClick={changePage.bind(this, GO_TO_PREV_PAGE)}
+      src={require(`../../../assets/chevron_left-24px.svg`)}/>
+    <Sticker>Page</Sticker>
+    <PageInput
+      value={page}
+      onChange={event => changePage(event.target.value)}
+      type="number"
+      min="1"
+      max={pagesCount}/>
+    <Sticker>of</Sticker>
+    <Sticker>{pagesCount}</Sticker>
+    <GoToNextButton
+      onClick={changePage.bind(this, GO_TO_NEXT_PAGE)}
+      src={require(`../../../assets/chevron_right-24px.svg`)}/>
+    <GoToLastButton
+      onClick={changePage.bind(this, GO_TO_LAST_PAGE)}
+      src={require(`../../../assets/last_page-24px.svg`)}/>
+    <RefreshButton
+      onClick={changePage.bind(this, REFRESH)}
+      src={require(`../../../assets/refresh-24px.svg`)}/>
+    <PageDropdown onChange={event => changePage(event.target.value)}>
+      {pagesCount && Array(pagesCount).fill(0).map((_, key) => (
+        <Option>{key + 1}</Option>
+      ))}
+    </PageDropdown>
+  </Wrapper>
+)
 
 export default PagingBar

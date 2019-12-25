@@ -3,7 +3,8 @@ import { API_ACCOUNTS } from '../../config'
 import {
   GET_ACCOUNTS_SUCCESS,
   GET_ACCOUNTS_STARTED,
-  GET_ACCOUNTS_FAILURE
+  GET_ACCOUNTS_FAILURE,
+  CHANGE_PAGE,
 } from './constants'
 import { authHeader } from '../../services/auth'
 
@@ -40,3 +41,14 @@ const getAccountsFailure = error => ({
     error
   }
 })
+
+export const changePage = (action) => {
+  return dispatch => {
+    dispatch({
+      type: CHANGE_PAGE,
+      payload: {
+        action
+      }
+    })
+  }
+}

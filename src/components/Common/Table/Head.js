@@ -14,9 +14,9 @@ const Cell = styled.th`
   margin-bottom: 30px;
 `
 
-const Head = ({schema}) => (
+const Head = ({fields}) => (
   <Wrapper>
-    {schema.map((field, key) => (
+    {fields.map((field, key) => (
       <Cell key={key}>{field}</Cell>
     ))}
   </Wrapper>

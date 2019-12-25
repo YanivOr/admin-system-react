@@ -1,0 +1,5 @@
+export const GO_TO_FIRST_PAGE = 'goToFirstPage'
+export const GO_TO_PREV_PAGE = 'goToPrevPage'
+export const GO_TO_NEXT_PAGE = 'goToNextPage'
+export const GO_TO_LAST_PAGE = 'goToLastPage'
+export const REFRESH = 'refresh'

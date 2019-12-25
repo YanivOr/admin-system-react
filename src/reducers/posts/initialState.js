@@ -3,7 +3,7 @@ const initialState = {
   count: 0,
   q: null,
   page: 1,
-  limit: 0,
+  limit: 1,
   sort: null,
   fields: [
     'id',

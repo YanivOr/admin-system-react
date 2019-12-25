@@ -6,20 +6,26 @@ import Table from '../Common/Table'
 
 const Wrapper = styled.div``
 
-const Entity = ({type, getEntities}) => {
-  const { title, fields, rows } = useSelector(state => state[type])
+const Entity = ({type, getEntities, changePage}) => {
+  const { title, fields, rows, limit, page, count } = useSelector(state => state[type])
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getEntities())
   }, [dispatch, getEntities])
 
+  const nextItems = limit * (page -1)
+  const pagesCount = Math.ceil(count / limit) || 1
+
   return (
     <Wrapper>
       <Sticker>{title}</Sticker>
       <Table
-        schema={fields}
-        data={rows}/>
+        data={rows && rows.slice(nextItems, nextItems + limit)}
+        fields={fields}
+        page={page}
+        pagesCount={pagesCount}
+        changePage={value => dispatch(changePage(value))}/>
     </Wrapper>
   )
 }

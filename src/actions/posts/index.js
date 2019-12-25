@@ -3,7 +3,8 @@ import { API_POSTS } from '../../config'
 import { 
   GET_POSTS_SUCCESS, 
   GET_POSTS_STARTED, 
-  GET_POSTS_FAILURE 
+  GET_POSTS_FAILURE,
+  CHANGE_PAGE,
 } from './constants'
 import { authHeader } from '../../services/auth'
 
@@ -40,3 +41,14 @@ const getPostsFailure = error => ({
     error
   }
 })
+
+export const changePage = (action) => {
+  return dispatch => {
+    dispatch({
+      type: CHANGE_PAGE,
+      payload: {
+        action
+      }
+    })
+  }
+}

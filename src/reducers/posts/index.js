@@ -1,14 +1,16 @@
 import {
   GET_POSTS_SUCCESS,
   GET_POSTS_STARTED,
-  GET_POSTS_FAILURE
+  GET_POSTS_FAILURE,
+  CHANGE_PAGE,
 } from '../../actions/posts/constants'
 import initialState from './initialState'
+import { getPage } from '../helpers'
 
-const accounts = (state = initialState, action) => {
-  switch (action.type) {
+const accounts = (state = initialState, {type, payload}) => {
+  switch (type) {
     case GET_POSTS_SUCCESS:
-      const {count, rows} = action.payload
+      const {count, rows} = payload
 
       return {
         ...state,
@@ -22,6 +24,14 @@ const accounts = (state = initialState, action) => {
     case GET_POSTS_FAILURE:
       return {
         ...state
+      }
+    case CHANGE_PAGE:
+      const { action } = payload
+      const page = getPage(action, state)
+      
+      return {
+        ...state,
+        page
       }
     default:
       return state

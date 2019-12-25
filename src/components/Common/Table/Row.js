@@ -12,9 +12,9 @@ const Cell = styled.td`
   margin-bottom: 30px;
 `
 
-const Row = ({item, schema}) => (
+const Row = ({item, fields}) => (
   <Wrapper>
-    {schema.map((field, key) => (
+    {fields.map((field, key) => (
       <Cell key={key}>{item[field]}</Cell>
     ))}
   </Wrapper>
