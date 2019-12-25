@@ -18,6 +18,10 @@ const MenuIcon = styled.img`
   background: #cccccc;
   box-shadow: 5px 5px 2px 0px rgba(0,0,0,0.75);
   margin: 20px;
+
+  :hover {
+    background: #888888;
+  }
 `
 
 const Header = ({btnClicked}) => {
@@ -25,8 +29,7 @@ const Header = ({btnClicked}) => {
     <Wrapper>
       <MenuIcon
         onClick={btnClicked}
-        src={require(`../../assets/menu-24px.svg`)}>
-      </MenuIcon>
+        src={require(`../../assets/menu-24px.svg`)}/>
     </Wrapper>
   )
 }

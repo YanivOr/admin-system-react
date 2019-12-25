@@ -3,23 +3,26 @@ import {
   GET_ACCOUNTS_STARTED,
   GET_ACCOUNTS_FAILURE
 } from '../../actions/accounts/constants'
+import initialState from './initialState'
 
-const accounts = (state = [], action) => {
+const accounts = (state = initialState, action) => {
   switch (action.type) {
     case GET_ACCOUNTS_SUCCESS:
-      const {rows} = action.payload
+      const {count, rows} = action.payload
 
-      return [
-        ...rows
-      ]
+      return {
+        ...state,
+        count,
+        rows,
+      }
     case GET_ACCOUNTS_STARTED:
-      return [
+      return {
         ...state
-      ]
+      }
     case GET_ACCOUNTS_FAILURE:
-      return [
+      return {
         ...state
-      ]
+      }
     default:
       return state
   }
