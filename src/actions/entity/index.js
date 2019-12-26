@@ -4,6 +4,7 @@ import {
   GET_ITEMS_STARTED, 
   GET_ITEMS_FAILURE,
   CHANGE_PAGE,
+  SORT_TABLE,
 } from './constants'
 import { api} from '../../config'
 import { authHeader } from '../../services/auth'
@@ -52,6 +53,18 @@ export const changePage = (entity, action) => {
       entity,
       payload: {
         action
+      }
+    })
+  }
+}
+
+export const sortTable = (entity, field) => {
+  return dispatch => {
+    dispatch({
+      type: SORT_TABLE,
+      entity,
+      payload: {
+        field
       }
     })
   }

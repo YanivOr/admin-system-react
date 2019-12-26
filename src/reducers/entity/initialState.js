@@ -5,7 +5,7 @@ const initialState = {
     q: null,
     page: 1,
     limit: 5,
-    sort: null,
+    sort: {},
     fields: [
       'id',
       'username',
@@ -25,7 +25,7 @@ const initialState = {
     q: null,
     page: 1,
     limit: 1,
-    sort: null,
+    sort: {},
     fields: [
       'id',
       'title',
