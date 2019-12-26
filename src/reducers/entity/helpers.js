@@ -4,7 +4,7 @@ import {
   GO_TO_NEXT_PAGE,
   GO_TO_LAST_PAGE,
   REFRESH,
-} from '../components/Common/Table/constants'
+} from '../../components/Common/Table/constants'
 
 export const getPage = (action, {page, limit, count}) => {
   switch (action) {
