@@ -1,3 +1,4 @@
+import initialState from './initialState'
 import {
   GET_ITEMS_SUCCESS,
   GET_ITEMS_STARTED,
@@ -5,8 +6,13 @@ import {
   CHANGE_PAGE,
   SORT_TABLE,
 } from '../../actions/entity/constants'
-import initialState from './initialState'
-import { getItemsSuccess, getItemsStarted, getItemsFailure, changePage, sortTable } from './helpers'
+import {
+  getItemsSuccess, 
+  getItemsStarted, 
+  getItemsFailure, 
+  changePage, 
+  sortTable 
+} from './main'
 
 const entity = (state = initialState, {type, entity, payload}) => {
   switch (type) {
