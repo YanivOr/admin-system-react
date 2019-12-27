@@ -66,7 +66,7 @@ export const sortTable = (state, entity, { field }) => {
     
       for (let [key, value] of Object.entries(sort)) {
         if (value === -1) b = [a, a = b][0] // swap a and b if desc
-        results = results || a[key].toString().localeCompare(b[key].toString(), 'es', {sensitivity: 'base'})
+        results = results || a[key].toString().localeCompare(b[key].toString(), 'en', {sensitivity: 'base'})
       }
     
       return results
