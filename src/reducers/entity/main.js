@@ -32,9 +32,6 @@ export const getItemsFailure = (state) => {
 export const changePage = (state, entity, { action }) => {
   const page = getPage(action, state[entity])
 
-  const clonedState = {...state}
-  clonedState[entity] = {...clonedState[entity], page}
-
   return {
     ...state,
     [entity]: {
