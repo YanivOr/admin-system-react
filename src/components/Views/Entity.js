@@ -14,7 +14,8 @@ const Entity = ({entity}) => {
     rows, 
     limit, 
     page, 
-    count 
+    count,
+    sort,
   } = useSelector(state => state.entity[entity])
   const dispatch = useDispatch()
 
@@ -33,6 +34,7 @@ const Entity = ({entity}) => {
         fields={fields}
         page={page}
         pagesCount={pagesCount}
+        sort={sort}
         changePage={value => dispatch(changePage(entity, value))}
         sortTable={value => dispatch(sortTable(entity, value))}/>
     </Wrapper>

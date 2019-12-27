@@ -14,12 +14,13 @@ const THead = styled.thead``;
 
 const TBody = styled.tbody``;
 
-const Table = ({data, fields, page, pagesCount, changePage, sortTable}) => (
+const Table = ({data, fields, page, sort, pagesCount, changePage, sortTable}) => (
   <Wrapper>
     <Main>
       <THead>
         <Head
           fields={fields}
+          sort={sort}
           sortTable={sortTable}/>
       </THead>
       <TBody>

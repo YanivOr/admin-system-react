@@ -1,10 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import {
-  NONE,
-  ASC,
-  DESC,
-} from './constants'
 
 const Wrapper = styled.tr``
 
@@ -32,16 +27,15 @@ const Text = styled.span`
 const Arrow = styled.img`
   transform: ${
     ({status}) => 
-      status === ASC ? 
-        'rotate(0)' :
-      status === DESC ?
+      status === 1 ? 
         'rotate(180deg)' :
-      status === NONE ?        
-        'scale(0)' : 'none'
+      status === -1 ?
+        'rotate(0deg)' :
+        'scale(0)'
   };
 `
 
-const Head = ({fields, sortTable}) => (
+const Head = ({fields, sort, sortTable}) => (
   <Wrapper>
     {fields.map((field, key) => (
       <Cell
@@ -50,7 +44,7 @@ const Head = ({fields, sortTable}) => (
         <ContentWrapper>
           <Text>{field}</Text>
           <Arrow
-            status={NONE}
+            status={sort[field]}
             src={require("../../../assets/arrow_drop_down-24px.svg")}/>
         </ContentWrapper>
       </Cell>

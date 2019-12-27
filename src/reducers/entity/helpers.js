@@ -6,14 +6,14 @@ import {
   REFRESH,
 } from '../../components/Common/Table/constants'
 
-export const getItemsSuccess = (state, entity, payload) => {
-  const {count, rows} = payload
-
-  const clonedState = {...state}
-  clonedState[entity] = {...clonedState[entity], count, rows}
-
+export const getItemsSuccess = (state, entity, {count, rows}) => {
   return {
-    ...clonedState,
+    ...state,
+    [entity]: {
+      ...state[entity],
+      count,
+      rows
+    }
   }
 }
 
@@ -29,23 +29,23 @@ export const getItemsFailure = (state) => {
   }
 }
 
-export const changePage = (state, entity, payload) => {
-  const { action } = payload
+export const changePage = (state, entity, { action }) => {
   const page = getPage(action, state[entity])
 
   const clonedState = {...state}
   clonedState[entity] = {...clonedState[entity], page}
 
   return {
-    ...clonedState
+    ...state,
+    [entity]: {
+      ...state[entity],
+      page
+    }
   }
 }
 
-export const sortTable = (state, entity, payload) => {
-    const { field } = payload
-
-    const clonedState = {...state}
-    const { sort }  = clonedState[entity]
+export const sortTable = (state, entity, { field }) => {
+    const { sort, rows }  = state[entity]
 
     // Update sort state by field
     if (sort.hasOwnProperty(field)) {
@@ -60,8 +60,28 @@ export const sortTable = (state, entity, payload) => {
       sort[field] = 1
     }
 
+    rows.sort((a, b) => {
+      let results = 0
+    
+      for (let [key, value] of Object.entries(sort)) {
+        if (value === -1) b = [a, a = b][0] // swap a and b if desc
+
+        try {
+          results = results || a[key].localeCompare(b[key], 'es', {sensitivity: 'base'})
+        }
+        catch (e) {}
+      }
+    
+      return results
+    })
+
     return {
-    ...clonedState,
+    ...state,
+    [entity]: {
+      ...state[entity],
+      sort,
+      rows,
+    }
   }
 }
 
