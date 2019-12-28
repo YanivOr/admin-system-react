@@ -9,10 +9,6 @@ const Sticker = styled.span`
   font-weight: bold;
   font-size: 20px;
   margin-bottom: 30px;
-
-  &:hover {
-    background: #cccccc;
-  }
 `
 
 export {

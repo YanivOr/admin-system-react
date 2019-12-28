@@ -14,7 +14,16 @@ const THead = styled.thead``;
 
 const TBody = styled.tbody``;
 
-const Table = ({data, fields, page, sort, pagesCount, changePage, sortTable}) => (
+const Table = ({
+  data,
+  fields,
+  page,
+  sort,
+  pagesCount,
+  changePage,
+  sortTable,
+  rowClicked
+}) => (
   <Wrapper>
     <Main>
       <THead>
@@ -29,6 +38,7 @@ const Table = ({data, fields, page, sort, pagesCount, changePage, sortTable}) =>
               key={key}
               item={item}
               fields={fields}
+              rowClicked={rowClicked}
             />
           )
         )}

@@ -23,7 +23,7 @@ const Wrapper = styled.div`
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 
     :hover {
-      background: #888888;
+      background: #aaaaaa;
     }
   }
 
@@ -75,7 +75,7 @@ const PagingBar = ({page, pagesCount, changePage}) => (
     <GoToPrevButton
       onClick={changePage.bind(this, GO_TO_PREV_PAGE)}
       src={require(`../../../assets/chevron_left-24px.svg`)}/>
-    <Sticker>Page</Sticker>
+    <Sticker>page</Sticker>
     <PageInput
       value={page}
       onChange={event => changePage(event.target.value)}

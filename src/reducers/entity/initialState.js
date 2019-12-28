@@ -19,6 +19,7 @@ const initialState = {
     ],
     rows: [],
     filteredRows: [],
+    selectedRowId: null,
   },
   posts: {
     title: 'Posts',
@@ -38,6 +39,7 @@ const initialState = {
     ],
     rows: [],
     filteredRows: [],
+    selectedRowId: null,
   }
 }
 

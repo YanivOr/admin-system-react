@@ -43,41 +43,44 @@ export const changePage = (state, entity, { action }) => {
 }
 
 export const sortData = (state, entity, { field }) => {
-    const { sort, filteredRows }  = state[entity]
+  const { sort, filteredRows }  = state[entity]
+  const sortObj = {...sort}
 
-    // Update sort state by field
-    if (sort.hasOwnProperty(field)) {
-      if (sort[field] === 1) {
-        sort[field] = -1
-      }
-      else {
-        delete sort[field]
-      }
+  // Update sort object by field
+  if (sortObj.hasOwnProperty(field)) {
+    if (sortObj[field] === 1) {
+      sortObj[field] = -1
     }
     else {
-      sort[field] = 1
+      delete sortObj[field]
     }
+  }
+  else {
+    sortObj[field] = 1
+  }
 
-    // Sort by fields
-    filteredRows.sort((a, b) => {
-      let results = 0
+  // Sort by fields
+  let sortedFilteredRows = [...filteredRows].sort((a, b) => {
+    let results = 0
+  
+    for (let [key, value] of Object.entries(sort)) {
+      if (value === -1) b = [a, a = b][0] // swap a and b if desc
+      results = results || a[key].toString().localeCompare(b[key].toString(), 'en', {sensitivity: 'base'})
+    }
+  
+    return results
+  })
     
-      for (let [key, value] of Object.entries(sort)) {
-        if (value === -1) b = [a, a = b][0] // swap a and b if desc
-        results = results || a[key].toString().localeCompare(b[key].toString(), 'en', {sensitivity: 'base'})
-      }
-    
-      return results
-    })
 
-    return {
+  return {
     ...state,
     [entity]: {
       ...state[entity],
-      sort,
-      filteredRows,
+      sort: sortObj,
+      filteredRows: sortedFilteredRows,
     }
   }
+
 }
 
 export const searchData = (state, entity, { q }) => {
@@ -98,6 +101,39 @@ export const searchData = (state, entity, { q }) => {
       ...state[entity],
       q,
       filteredRows,
+    }
+  }
+}
+
+export const populateForm = (state, entity, { selectedRowId }) => {
+  return {
+    ...state,
+    [entity]: {
+      ...state[entity],
+      selectedRowId,
+    }
+  }
+}
+
+export const updateField = (state, entity, { field, value}) => {
+  const { selectedRowId, rows } = state[entity]
+
+  if (selectedRowId) {
+    const selectedRow = rows.filter(({id}) => {
+      return id === selectedRowId
+    })[0]
+
+    console.log(selectedRow)
+  } else {
+    //const selectedRow = rows
+    //console.log(temp)
+  }
+
+  return {
+    ...state,
+    [entity]: {
+      ...state[entity],
+      rows,
     }
   }
 }

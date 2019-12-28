@@ -6,9 +6,12 @@ import {
   changePage,
   sortTable,
   searchTable,
+  rowClicked,
+  fieldChanged,
 } from '../../actions/entity'
 import { Sticker } from '../Common/Sticker'
 import Table from '../Common/Table'
+import Form from '../Common/Form'
 
 const Wrapper = styled.div``
 
@@ -35,6 +38,7 @@ const Entity = ({entity}) => {
     title,
     fields,
     filteredRows,
+    selectedRowId,
     limit,
     page,
     count,
@@ -64,7 +68,12 @@ const Entity = ({entity}) => {
         pagesCount={pagesCount}
         sort={sort}
         changePage={value => dispatch(changePage(entity, value))}
-        sortTable={value => dispatch(sortTable(entity, value))}/>
+        sortTable={value => dispatch(sortTable(entity, value))}
+        rowClicked={value => dispatch(rowClicked(entity, value))}/>
+      <Form
+        data={filteredRows && filteredRows.filter(({id}) => id === selectedRowId)[0]}
+        fields={fields}
+        fieldChanged={(field, value) => dispatch(fieldChanged(entity, {field, value}))}/>
     </Wrapper>
   )
 }

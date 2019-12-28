@@ -6,6 +6,8 @@ import {
   CHANGE_PAGE,
   SORT_TABLE,
   SEARCH_TABLE,
+  ROW_CLICKED,
+  FIELD_CHANGED,
 } from '../../actions/entity/constants'
 import {
   getItemsSuccess, 
@@ -14,6 +16,8 @@ import {
   changePage, 
   sortData,
   searchData,
+  populateForm,
+  updateField,
 } from './main'
 
 const entity = (state = initialState, {type, entity, payload}) => {
@@ -24,6 +28,8 @@ const entity = (state = initialState, {type, entity, payload}) => {
     case CHANGE_PAGE: return changePage(state, entity, payload)
     case SORT_TABLE: return sortData(state, entity, payload)
     case SEARCH_TABLE: return searchData(state, entity, payload)
+    case ROW_CLICKED: return populateForm(state, entity, payload)
+    case FIELD_CHANGED: return updateField(state, entity, payload)
     default:
       return state
   }

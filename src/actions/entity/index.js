@@ -6,6 +6,8 @@ import {
   CHANGE_PAGE,
   SORT_TABLE,
   SEARCH_TABLE,
+  ROW_CLICKED,
+  FIELD_CHANGED,
 } from './constants'
 import { api} from '../../config'
 import { authHeader } from '../../services/auth'
@@ -78,6 +80,31 @@ export const searchTable = (entity, q) => {
       entity,
       payload: {
         q
+      }
+    })
+  }
+}
+
+export const rowClicked = (entity, selectedRowId) => {
+  return dispatch => {
+    dispatch({
+      type: ROW_CLICKED,
+      entity,
+      payload: {
+        selectedRowId
+      }
+    })
+  }
+}
+
+export const fieldChanged = (entity, {field, value}) => {
+  return dispatch => {
+    dispatch({
+      type: FIELD_CHANGED,
+      entity,
+      payload: {
+        field,
+        value,
       }
     })
   }

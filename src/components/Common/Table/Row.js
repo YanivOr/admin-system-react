@@ -1,7 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Wrapper = styled.tr``
+const Wrapper = styled.tr`
+  cursor: pointer;
+  
+  &:hover {
+    & > td {
+      background: #aaaaaa;
+    }
+  }
+`
 
 const Cell = styled.td`
   padding: 5px 15px;
@@ -12,8 +20,9 @@ const Cell = styled.td`
   margin-bottom: 30px;
 `
 
-const Row = ({item, fields}) => (
-  <Wrapper>
+const Row = ({item, item: {id}, fields, rowClicked}) => (
+  <Wrapper
+    onClick={rowClicked.bind(this, id)}>
     {fields.map((field, key) => (
       <Cell key={key}>{item[field]}</Cell>
     ))}

@@ -20,7 +20,7 @@ const MenuIcon = styled.img`
   margin: 20px;
 
   :hover {
-    background: #888888;
+    background: #aaaaaa;
   }
 `
 
