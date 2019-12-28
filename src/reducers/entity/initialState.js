@@ -18,6 +18,7 @@ const initialState = {
       'updatedAt'
     ],
     rows: [],
+    filteredRows: [],
   },
   posts: {
     title: 'Posts',
@@ -36,6 +37,7 @@ const initialState = {
       'updatedAt',
     ],
     rows: [],
+    filteredRows: [],
   }
 }
 

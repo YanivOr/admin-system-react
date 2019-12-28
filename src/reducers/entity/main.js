@@ -12,7 +12,8 @@ export const getItemsSuccess = (state, entity, {count, rows}) => {
     [entity]: {
       ...state[entity],
       count,
-      rows
+      rows,
+      filteredRows: rows,
     }
   }
 }
@@ -36,13 +37,13 @@ export const changePage = (state, entity, { action }) => {
     ...state,
     [entity]: {
       ...state[entity],
-      page
+      page,
     }
   }
 }
 
-export const sortTable = (state, entity, { field }) => {
-    const { sort, rows }  = state[entity]
+export const sortData = (state, entity, { field }) => {
+    const { sort, filteredRows }  = state[entity]
 
     // Update sort state by field
     if (sort.hasOwnProperty(field)) {
@@ -58,7 +59,7 @@ export const sortTable = (state, entity, { field }) => {
     }
 
     // Sort by fields
-    rows.sort((a, b) => {
+    filteredRows.sort((a, b) => {
       let results = 0
     
       for (let [key, value] of Object.entries(sort)) {
@@ -74,7 +75,29 @@ export const sortTable = (state, entity, { field }) => {
     [entity]: {
       ...state[entity],
       sort,
-      rows,
+      filteredRows,
+    }
+  }
+}
+
+export const searchData = (state, entity, { q }) => {
+  const { rows }  = state[entity]
+
+  const filteredRows = rows.filter(item => {
+    for (let [, value] of Object.entries(item)) {
+      if (new RegExp(q).test(value.toString())) {
+        return item
+      }
+    }
+    return false
+  })
+
+  return {
+    ...state,
+    [entity]: {
+      ...state[entity],
+      q,
+      filteredRows,
     }
   }
 }

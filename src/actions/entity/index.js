@@ -5,6 +5,7 @@ import {
   GET_ITEMS_FAILURE,
   CHANGE_PAGE,
   SORT_TABLE,
+  SEARCH_TABLE,
 } from './constants'
 import { api} from '../../config'
 import { authHeader } from '../../services/auth'
@@ -65,6 +66,18 @@ export const sortTable = (entity, field) => {
       entity,
       payload: {
         field
+      }
+    })
+  }
+}
+
+export const searchTable = (entity, q) => {
+  return dispatch => {
+    dispatch({
+      type: SEARCH_TABLE,
+      entity,
+      payload: {
+        q
       }
     })
   }
