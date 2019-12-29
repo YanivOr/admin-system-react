@@ -1,6 +1,6 @@
 import initialState from './initialState'
 import {
-  SET_ROUTE_STATE,
+  VERIFY_TOKEN_SUCCESS,
 } from '../../actions/router/constants'
 import {
   setRouteState,
@@ -8,7 +8,7 @@ import {
 
 const entity = (state = initialState, {type, payload}) => {
   switch (type) {
-    case SET_ROUTE_STATE: return setRouteState(state, payload)
+    case VERIFY_TOKEN_SUCCESS: return setRouteState(state, payload)
     default:
       return state
   }

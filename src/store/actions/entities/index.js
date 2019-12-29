@@ -9,7 +9,7 @@ import {
   ROW_CLICKED,
   FIELD_CHANGED,
 } from './constants'
-import { api} from '../../../config'
+import { api } from '../../../config'
 import { authHeader } from '../../../services/auth'
 
 export const getItems = (entity) => {
