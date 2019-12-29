@@ -33,9 +33,9 @@ const Table = ({
           sortTable={sortTable}/>
       </THead>
       <TBody>
-        {data && data.map((item, key) => (
+        {data && Object.values(data).map(item => (
             <Row
-              key={key}
+              key={item.id}
               item={item}
               fields={fields}
               rowClicked={rowClicked}

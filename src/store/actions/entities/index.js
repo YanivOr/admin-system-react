@@ -9,8 +9,8 @@ import {
   ROW_CLICKED,
   FIELD_CHANGED,
 } from './constants'
-import { api} from '../../config'
-import { authHeader } from '../../services/auth'
+import { api} from '../../../config'
+import { authHeader } from '../../../services/auth'
 
 export const getItems = (entity) => {
   return dispatch => {
@@ -85,13 +85,13 @@ export const searchTable = (entity, q) => {
   }
 }
 
-export const rowClicked = (entity, selectedRowId) => {
+export const rowClicked = (entity, rowId) => {
   return dispatch => {
     dispatch({
       type: ROW_CLICKED,
       entity,
       payload: {
-        selectedRowId
+        rowId
       }
     })
   }

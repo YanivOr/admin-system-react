@@ -17,9 +17,10 @@ const initialState = {
       'createdAt',
       'updatedAt'
     ],
-    rows: [],
-    filteredRows: [],
-    selectedRowId: null,
+    rows: {},
+    filteredRows: {},
+    selectedRow: {},
+    pagesCount: 0,
   },
   posts: {
     title: 'Posts',
@@ -37,9 +38,10 @@ const initialState = {
       'createdAt',
       'updatedAt',
     ],
-    rows: [],
-    filteredRows: [],
-    selectedRowId: null,
+    rows: {},
+    filteredRows: {},
+    selectedRow: {},
+    pagesCount: 0,
   }
 }
 

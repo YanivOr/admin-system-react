@@ -1,0 +1,1 @@
+export const SET_ROUTE_STATE = 'SET_ROUTE_STATE'

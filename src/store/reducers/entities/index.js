@@ -8,7 +8,7 @@ import {
   SEARCH_TABLE,
   ROW_CLICKED,
   FIELD_CHANGED,
-} from '../../actions/entity/constants'
+} from '../../actions/entities/constants'
 import {
   getItemsSuccess, 
   getItemsStarted, 
@@ -20,7 +20,7 @@ import {
   updateField,
 } from './main'
 
-const entity = (state = initialState, {type, entity, payload}) => {
+const entities = (state = initialState, {type, entity, payload}) => {
   switch (type) {
     case GET_ITEMS_SUCCESS: return getItemsSuccess(state, entity, payload)
     case GET_ITEMS_STARTED: return getItemsStarted(state)
@@ -35,4 +35,4 @@ const entity = (state = initialState, {type, entity, payload}) => {
   }
 }
 
-export default entity
+export default entities

@@ -8,7 +8,7 @@ import {
   searchTable,
   rowClicked,
   fieldChanged,
-} from '../../actions/entity'
+} from '../../store/actions/entities'
 import { Sticker } from '../Common/Sticker'
 import Table from '../Common/Table'
 import Form from '../Common/Form'
@@ -38,20 +38,16 @@ const Entity = ({entity}) => {
     title,
     fields,
     filteredRows,
-    selectedRowId,
-    limit,
+    selectedRow,
     page,
-    count,
+    pagesCount,
     sort,
-  } = useSelector(state => state.entity[entity])
+  } = useSelector(state => state.entities[entity])
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getItems(entity))
   }, [dispatch, entity])
-
-  const nextItems = limit * (page -1)
-  const pagesCount = Math.ceil(count / limit) || 1
 
   return (
     <Wrapper>
@@ -62,16 +58,16 @@ const Entity = ({entity}) => {
           placeholder="search the table"/>
       </TopBar>
       <Table
-        data={filteredRows && filteredRows.slice(nextItems, nextItems + limit)}
+        data={filteredRows}
         fields={fields}
         page={page}
-        pagesCount={pagesCount}
         sort={sort}
+        pagesCount={pagesCount}
         changePage={value => dispatch(changePage(entity, value))}
         sortTable={value => dispatch(sortTable(entity, value))}
         rowClicked={value => dispatch(rowClicked(entity, value))}/>
       <Form
-        data={filteredRows && filteredRows.filter(({id}) => id === selectedRowId)[0]}
+        data={selectedRow}
         fields={fields}
         fieldChanged={(field, value) => dispatch(fieldChanged(entity, {field, value}))}/>
     </Wrapper>

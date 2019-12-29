@@ -4,7 +4,25 @@ import {
   GO_TO_NEXT_PAGE,
   GO_TO_LAST_PAGE,
   REFRESH,
-} from '../../components/Common/Table/constants'
+} from '../../../components/Common/Table/constants'
+
+export const arrToObj = (array, key) => {
+  return array.reduce((obj, item) => {
+    return {
+      ...obj,
+      [item[key]]: item,
+    };
+  }, {});
+}
+
+export const getPageData = (rows, limit, page) => {
+  const nextItems = limit * (page -1)
+  return rows.slice(nextItems, nextItems + limit)
+}
+
+export const countPages = (count, limit) => {
+  return Math.ceil(count / limit)
+}
 
 export const getPage = (action, {page, limit, count}) => {
   switch (action) {
