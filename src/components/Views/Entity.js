@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import {
-  getItems,
   changePage,
   sortTable,
   searchTable,
@@ -44,10 +43,6 @@ const Entity = ({entity}) => {
     sort,
   } = useSelector(state => state.entities[entity])
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getItems(entity))
-  }, [dispatch, entity])
 
   return (
     <Wrapper>

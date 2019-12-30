@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector }  from 'react-redux'
 import {
   Switch,
@@ -6,6 +6,7 @@ import {
   Redirect
 } from 'react-router-dom'
 import { handleAuth } from '../store/actions/router'
+import { getItems } from '../store/actions/entities'
 import Layout from '../components/Layout'
 import Loading from '../components/Common/Loading'
 import Dashboard from '../components/Views/Dashboard'
@@ -25,7 +26,13 @@ const CustomRoute = (props) => {
 
   useEffect(() => {
     dispatch(handleAuth(props))
-  }, [dispatch, props])
+
+    if (routeState === ROUTE) {
+      dispatch(getItems('accounts'))
+      dispatch(getItems('posts'))
+    }
+    
+  }, [dispatch, props, routeState])
 
   if (routeState === INIT) {
     return <Loading/>

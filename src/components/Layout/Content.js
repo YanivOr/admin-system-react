@@ -10,12 +10,10 @@ const Wrapper = styled.div`
   padding: 20px;
 `
 
-const Content = ({children}) => {
-  return (
-    <Wrapper>
-      {children}
-    </Wrapper>
-  )
-}
+const Content = ({children}) => (
+  <Wrapper>
+    {children}
+  </Wrapper>
+)
 
 export default Content

@@ -24,14 +24,12 @@ const MenuIcon = styled.img`
   }
 `
 
-const Header = ({btnClicked}) => {
-  return (
-    <Wrapper>
-      <MenuIcon
-        onClick={btnClicked}
-        src={require(`../../assets/menu-24px.svg`)}/>
-    </Wrapper>
-  )
-}
+const Header = ({btnClicked}) => (
+  <Wrapper>
+    <MenuIcon
+      onClick={btnClicked}
+      src={require(`../../assets/menu-24px.svg`)}/>
+  </Wrapper>
+)
 
 export default Header

@@ -11,12 +11,10 @@ const Wrapper = styled.div`
   display: none;
 `
 
-const Footer = () => {
-  return (
-    <Wrapper>
+const Footer = () => (
+  <Wrapper>
 
-    </Wrapper>
-  )
-}
+  </Wrapper>
+)
 
 export default Footer
