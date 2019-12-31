@@ -32,9 +32,15 @@ const Wrapper = styled.div`
   }
 `
 
-const GoToStartButton = styled.img``
+const GoToStartButton = styled.img`
+  width: 24px;
+  height: 24px;
+`
 
-const GoToPrevButton = styled.img``
+const GoToPrevButton = styled.img`
+  width: 24px;
+  height: 24px;
+`
 
 const PageInput = styled.input`
   background: #cccccc;
@@ -48,11 +54,20 @@ const PageInput = styled.input`
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 `
 
-const GoToNextButton = styled.img``
+const GoToNextButton = styled.img`
+  width: 24px;
+  height: 24px;
+`
 
-const GoToLastButton = styled.img``
+const GoToLastButton = styled.img`
+  width: 24px;
+  height: 24px;
+`
 
-const RefreshButton = styled.img``
+const RefreshButton = styled.img`
+  width: 24px;
+  height: 24px;
+`
 
 const PageDropdown = styled.select`
   background: #cccccc;

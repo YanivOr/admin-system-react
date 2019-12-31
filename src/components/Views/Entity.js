@@ -35,12 +35,9 @@ const Search = styled.input`
 const Entity = ({entity}) => {
   const {
     title,
-    fields,
-    filteredRows,
-    selectedRow,
-    page,
-    pagesCount,
-    sort,
+    table,
+    form,
+    rows,
   } = useSelector(state => state.entities[entity])
   const dispatch = useDispatch()
 
@@ -53,17 +50,13 @@ const Entity = ({entity}) => {
           placeholder="search the table"/>
       </TopBar>
       <Table
-        data={filteredRows}
-        fields={fields}
-        page={page}
-        sort={sort}
-        pagesCount={pagesCount}
+        rows={rows}
+        table={table}
         changePage={value => dispatch(changePage(entity, value))}
         sortTable={value => dispatch(sortTable(entity, value))}
         rowClicked={value => dispatch(rowClicked(entity, value))}/>
       <Form
-        data={selectedRow}
-        fields={fields}
+        form={form}
         fieldChanged={(field, value) => dispatch(fieldChanged(entity, {field, value}))}/>
     </Wrapper>
   )

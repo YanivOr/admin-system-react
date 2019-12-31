@@ -20,10 +20,10 @@ const Cell = styled.td`
   margin-bottom: 30px;
 `
 
-const Row = ({item, item: {id}, fields, rowClicked}) => (
+const Row = ({item = {}, item: { id } = '', fields, rowClicked}) => (
   <Wrapper
     onClick={rowClicked.bind(this, id)}>
-    {fields.map((field, key) => (
+    {Object.keys(fields).map((field, key) => (
       <Cell key={key}>{item[field]}</Cell>
     ))}
   </Wrapper>

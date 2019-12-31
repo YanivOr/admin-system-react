@@ -1,4 +1,4 @@
-import initialState from './initialState'
+import initialState from './initialState/index'
 import {
   GET_ITEMS_SUCCESS,
   GET_ITEMS_STARTED,
@@ -8,11 +8,13 @@ import {
   SEARCH_TABLE,
   ROW_CLICKED,
   FIELD_CHANGED,
+  GET_PROCESSED_ITEMS,
 } from '../../actions/entities/constants'
 import {
   getItemsSuccess, 
   getItemsStarted, 
-  getItemsFailure, 
+  getItemsFailure,
+  getProcessedItems,
   changePage, 
   sortData,
   searchData,
@@ -25,6 +27,7 @@ const entities = (state = initialState, {type, entity, payload}) => {
     case GET_ITEMS_SUCCESS: return getItemsSuccess(state, entity, payload)
     case GET_ITEMS_STARTED: return getItemsStarted(state)
     case GET_ITEMS_FAILURE: return getItemsFailure(state)
+    case GET_PROCESSED_ITEMS: return getProcessedItems(state, entity)
     case CHANGE_PAGE: return changePage(state, entity, payload)
     case SORT_TABLE: return sortData(state, entity, payload)
     case SEARCH_TABLE: return searchData(state, entity, payload)

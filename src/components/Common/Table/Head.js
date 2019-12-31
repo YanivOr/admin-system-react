@@ -25,6 +25,8 @@ const Text = styled.span`
 `
 
 const Arrow = styled.img`
+  width: 24px;
+  height: 24px;
   transform: ${
     ({status}) => 
       status === 1 ? 
@@ -37,12 +39,12 @@ const Arrow = styled.img`
 
 const Head = ({fields, sort, sortTable}) => (
   <Wrapper>
-    {fields.map((field, key) => (
+    {Object.keys(fields).map((field, key) => (
       <Cell
         key={key}
         onClick={sortTable.bind(this, field)}>
         <ContentWrapper>
-          <Text>{field}</Text>
+          <Text>{fields[field].label}</Text>
           <Arrow
             status={sort[field]}
             src={require("../../../assets/arrow_drop_down-24px.svg")}/>

@@ -83,15 +83,15 @@ const Submit = styled.button``
 
 const Reset = styled.button``
 
-const Form = ({data = {}, fields, fieldChanged}) => (
+const Form = ({form: {fields, selectedRow, fieldChanged}}) => (
   <Wrapper>
     <FormWrapper>
-      {fields.map((field, key) => (
+      {Object.keys(fields).map((field, key) => (
         <Group
           key={key}>
-          <Label>{field}</Label>
+          <Label>{fields[field].label}</Label>
           <Input
-            value={data[field]}
+            value={selectedRow[field]}
             onChange={event => fieldChanged(field, event.target.value)}
             type="text"/>
         </Group>

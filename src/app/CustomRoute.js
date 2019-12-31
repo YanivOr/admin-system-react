@@ -29,7 +29,7 @@ const CustomRoute = (props) => {
 
     if (routeState === ROUTE) {
       dispatch(getItems('accounts'))
-      dispatch(getItems('posts'))
+      // dispatch(getItems('posts'))
     }
     
   }, [dispatch, props, routeState])

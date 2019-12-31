@@ -3,6 +3,7 @@ import {
   GET_ITEMS_SUCCESS, 
   GET_ITEMS_STARTED, 
   GET_ITEMS_FAILURE,
+  GET_PROCESSED_ITEMS,
   CHANGE_PAGE,
   SORT_TABLE,
   SEARCH_TABLE,
@@ -21,6 +22,7 @@ export const getItems = (entity) => {
           { headers: { Authorization: authHeader() } })
       .then(({data}) => {
         dispatch(getItemsSuccess(entity, data))
+        dispatch(getProcessedItems(entity))
       })
       .catch(({message}) => {
         dispatch(getItemsFailure(entity, message))
@@ -49,6 +51,12 @@ const getItemsFailure = (entity, error) => ({
   }
 })
 
+const getProcessedItems = (entity) => ({
+  type: GET_PROCESSED_ITEMS,
+  entity,
+  payload: {} 
+})
+
 export const changePage = (entity, action) => {
   return dispatch => {
     dispatch({
@@ -58,6 +66,7 @@ export const changePage = (entity, action) => {
         action
       }
     })
+    dispatch(getProcessedItems(entity))
   }
 }
 
@@ -70,6 +79,7 @@ export const sortTable = (entity, field) => {
         field
       }
     })
+    dispatch(getProcessedItems(entity))
   }
 }
 
@@ -82,6 +92,7 @@ export const searchTable = (entity, q) => {
         q
       }
     })
+    dispatch(getProcessedItems(entity))
   }
 }
 

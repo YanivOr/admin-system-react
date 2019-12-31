@@ -1,23 +1,21 @@
 import {
+  arrToHash,
   getPage,
   updateSortObject,
-  sortByFields,
-  filterByFields,
-  arrToObj,
-  getPageData,
+  getRowIds,
   countPages,
 } from './process'
 
-export const getItemsSuccess = (state, entity, {count, rows}) => ({
-  ...state,
-  [entity]: {
-    ...state[entity],
-    count,
-    rows: arrToObj(rows, 'id'),
-    filteredRows: getPageData(rows, state[entity].limit, state[entity].page),
-    pagesCount: countPages(count, state[entity].limit),
-  }
-})
+export const getItemsSuccess = (state, entity, { rows }) => {
+  return ({
+    ...state,
+    [entity]: {
+      ...state[entity],
+      rows:
+        arrToHash(rows),
+    }
+  })
+}
 
 export const getItemsStarted = (state) => ({
   ...state
@@ -27,58 +25,78 @@ export const getItemsFailure = (state) => ({
   ...state
 })
 
+export const getProcessedItems = (state, entity) => {
+  const { rows, table, table: { limit, page, sort, q }} = state[entity]
+  const [rowIds, count] = getRowIds(rows, limit, page, sort, q)
 
-export const changePage = (state, entity, { action }) => ({
-  ...state,
-  [entity]: {
-    ...state[entity],
-    page: getPage(action, state[entity]),
-    filteredRows: getPageData(state[entity].rows, state[entity].limit, state[entity].page),
-//    pagesCount: Math.ceil(state[entity].count / state[entity].limit) || 1,
-  }
-})
+  return ({
+    ...state,
+    [entity]: {
+      ...state[entity],
+      table: {
+        ...table,
+        rowIds,
+        pagesCount:
+          countPages(count, limit),
+        count,
+      }
+    }
+  })
+}
+
+export const changePage = (state, entity, { action }) => {
+  const { table, table: { limit, page, count }} = state[entity]
+ 
+  return ({
+    ...state,
+    [entity]: {
+      ...state[entity],
+      table: {
+        ...table,
+        page:
+          getPage(action, page, limit, count)
+      },
+    }
+  })
+}
 
 export const sortData = (state, entity, { field }) => {
-  const { sort, filteredRows }  = state[entity]
+  const { table ,table :{ sort }}  = state[entity]
 
   return {
     ...state,
     [entity]: {
       ...state[entity],
-      sort: updateSortObject(sort, field),
-      filteredRows: sortByFields(filteredRows, sort),
+      table: {
+        ...table,
+        sort: 
+          updateSortObject(sort, field),
+      }
     }
   }
-
 }
 
 export const searchData = (state, entity, { q }) => {
-  const { rows }  = state[entity]
-  const { filteredRows, count } = filterByFields(rows, q)
+  const { table }  = state[entity]
 
   return {
     ...state,
     [entity]: {
       ...state[entity],
-      q,
-      filteredRows,
-      count,
-      page: 1,
+      table: {
+        ...table,
+        q,
+        page: 1,
+      }
     }
   }
 }
 
 export const populateForm = (state, entity, { rowId }) => ({
   ...state,
-  [entity]: {
-    ...state[entity],
-    selectedRow: state[entity].rows[rowId],
-  }
 })
 
 export const updateField = (state, entity, { field, value}) => {
-  // const { rowId, rows } = state[entity]
-
   return {
     ...state,
   }

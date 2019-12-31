@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 
 const Gif = styled.img`
   width: 200px;
+  height 200px;
   animation-name: spin;
   animation-duration: 1000ms;
   animation-iteration-count: infinite;

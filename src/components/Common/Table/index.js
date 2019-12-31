@@ -15,11 +15,8 @@ const THead = styled.thead``;
 const TBody = styled.tbody``;
 
 const Table = ({
-  data,
-  fields,
-  page,
-  sort,
-  pagesCount,
+  rows,
+  table: { fields, sort, page, pagesCount, rowIds },
   changePage,
   sortTable,
   rowClicked
@@ -33,15 +30,13 @@ const Table = ({
           sortTable={sortTable}/>
       </THead>
       <TBody>
-        {data && Object.values(data).map(item => (
-            <Row
-              key={item.id}
-              item={item}
-              fields={fields}
-              rowClicked={rowClicked}
-            />
-          )
-        )}
+        {rowIds && rowIds.map(id => (
+          <Row
+            key={id}
+            item={rows[id]}
+            fields={fields}
+            rowClicked={rowClicked}/>
+        ))}
       </TBody>
     </Main>
     <PagingBar

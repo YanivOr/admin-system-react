@@ -28,39 +28,24 @@ export const arrToHash = (array, key = 'id') => {
  * @param {Number} limit - rows in page
  * @param {Number} page  - page number
  */
-export const getRowIds = (rows, limit, page, sort, q) => {
+export const pageRowIds = (rows, limit, page) => {
   const nextItems = limit * (page -1)
-  const filteredRows = Object
-    .values(rows)
-    
-    .filter(item => {
-      for (let [, value] of Object.entries(item)) {
-        if (new RegExp(q).test(value.toString())) {
-          return item
-        }
-      }
-      return false
-    })
+  return Object
+          .values(rows)
+            .slice(nextItems, nextItems + limit)
+              .reduce((obj, item) => {
+    return [...obj, item.id]
+  }, [])
+}
 
-  const rowIds = filteredRows
-    .sort((a, b) => {
-      let results = 0
-    
-      for (let [key, value] of Object.entries(sort)) {
-        if (value === -1) b = [a, a = b][0] // swap a and b if desc
-        results = results || a[key].toString().localeCompare(b[key].toString(), 'en', {sensitivity: 'base'})
-      }
-    
-      return results
-    })
-    
-    .slice(nextItems, nextItems + limit)
-    
-    .reduce((obj, item) => {
-      return [...obj, item.id]
-    }, [])
-
-  return [rowIds, filteredRows.length]
+/**
+ * Returns total number of pages
+ * 
+ * @param {Number} count - total number of rows
+ * @param {Number} limit - rows in page
+ */
+export const countPages = (count, limit) => {
+  return Math.ceil(count / limit)
 }
 
 /**
@@ -85,17 +70,6 @@ export const getPage = (action, page, limit, count) => {
     default:
       return parseInt(action)
   }
-}
-/**/
-
-/**
- * Returns total number of pages
- * 
- * @param {Number} count - total number of rows
- * @param {Number} limit - rows in page
- */
-export const countPages = (count, limit) => {
-  return Math.ceil(count / limit)
 }
 
 /**
@@ -122,3 +96,51 @@ export const updateSortObject = (sort, field) => {
   return sortObj
 }
 
+/**
+ * 
+ * @param {*} rows 
+ * @param {*} sort 
+ * @param {*} limit 
+ * @param {*} page 
+ */
+export const sortByFields = (rows, sort, limit, page) => {
+  const nextItems = limit * (page -1)
+
+  return Object.values(rows).sort((a, b) => {
+    let results = 0
+  
+    for (let [key, value] of Object.entries(sort)) {
+      if (value === -1) b = [a, a = b][0] // swap a and b if desc
+      results = results || a[key].toString().localeCompare(b[key].toString(), 'en', {sensitivity: 'base'})
+    }
+  
+    return results
+  }).slice(nextItems, nextItems + limit).reduce((obj, item) => {
+    return [...obj, item.id]
+  }, [])
+}
+
+/**
+ * 
+ * @param {*} rows 
+ * @param {*} q 
+ * @param {*} limit 
+ * @param {*} page 
+ */
+export const filterByFields = (rows, q, limit, page) => {
+  const nextItems = limit * (page -1)
+
+  const filteredRows = Object.values(rows).filter(item => {
+    for (let [, value] of Object.entries(item)) {
+      if (new RegExp(q).test(value.toString())) {
+        return item
+      }
+    }
+    return false
+  }).slice(nextItems, nextItems + limit)
+
+  return {
+    filteredRows,
+    count: filteredRows.length
+  }
+}
