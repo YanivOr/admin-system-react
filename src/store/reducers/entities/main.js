@@ -94,10 +94,21 @@ export const searchData = (state, entity, { q }) => {
 
 export const populateForm = (state, entity, { rowId }) => ({
   ...state,
+  [entity]: {
+    ...state[entity],
+    form: {
+      ...state[entity].form,
+      selectedRow: state[entity].rows[rowId],
+    }
+  }
 })
 
 export const updateField = (state, entity, { field, value}) => {
+  /*
+  // const { rowId, rows } = state[entity]
+
   return {
     ...state,
   }
+  */
 }
