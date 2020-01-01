@@ -29,10 +29,16 @@ export const arrToHash = (array, key = 'id') => {
  * @param {Number} page  - page number
  */
 export const getRowIds = (rows, limit, page, sort, q) => {
-  const nextItems = limit * (page -1)
+  const nextItems = limit * (page -1) // for later use in slice for paging
+
+  // I need to get the total number of rows 
+  // after filtering (search bar) but before paging (slice function)
+  // for later return it back alongside the row ids
+
   const filteredRows = Object
     .values(rows)
-    
+
+    // Search by term (q)
     .filter(item => {
       for (let [, value] of Object.entries(item)) {
         if (new RegExp(q).test(value.toString())) {
@@ -43,6 +49,7 @@ export const getRowIds = (rows, limit, page, sort, q) => {
     })
 
   const rowIds = filteredRows
+    // Sorting by multiple columns
     .sort((a, b) => {
       let results = 0
     
@@ -53,9 +60,11 @@ export const getRowIds = (rows, limit, page, sort, q) => {
     
       return results
     })
-    
+
+    // Paging
     .slice(nextItems, nextItems + limit)
-    
+
+    // Reduce into array of row ids
     .reduce((obj, item) => {
       return [...obj, item.id]
     }, [])

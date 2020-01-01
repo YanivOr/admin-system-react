@@ -103,12 +103,6 @@ export const populateForm = (state, entity, { rowId }) => ({
   }
 })
 
-export const updateField = (state, entity, { field, value}) => {
-  /*
-  // const { rowId, rows } = state[entity]
-
-  return {
-    ...state,
-  }
-  */
-}
+export const updateField = (state, entity, { field, value}) => ({
+  ...state,
+})
