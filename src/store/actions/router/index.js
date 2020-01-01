@@ -10,8 +10,10 @@ import { fetchToken, authHeader } from '../../../services/auth'
 
 export const handleAuth = ({ location }) => {
   return dispatch => {
-    if (fetchToken(location) === INIT) {
+    const routeState = fetchToken(location)
+    if (routeState === INIT) {
       dispatch(verifyTokenFailure('No token'))
+      return
     }
     dispatch(verifyTokenStarted())
 
@@ -19,7 +21,7 @@ export const handleAuth = ({ location }) => {
       .get(api.verifyToken,
           { headers: { Authorization: authHeader() } })
       .then(() => {
-        dispatch(verifyTokenSuccess(location))
+        dispatch(verifyTokenSuccess(routeState))
       })
       .catch(({ message }) => {
         dispatch(verifyTokenFailure(message))
@@ -27,10 +29,10 @@ export const handleAuth = ({ location }) => {
   }
 }
 
-const verifyTokenSuccess = (data) => ({
+const verifyTokenSuccess = (routeState) => ({
   type: VERIFY_TOKEN_SUCCESS,
   payload: {
-    ...data
+    routeState
   }
 })
 
