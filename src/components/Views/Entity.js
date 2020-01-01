@@ -7,6 +7,9 @@ import {
   searchTable,
   rowClicked,
   fieldChanged,
+  saveItem,
+  resetForm,
+  clearForm,
 } from '../../store/actions/entities'
 import { Sticker } from '../Common/Sticker'
 import Table from '../Common/Table'
@@ -36,7 +39,10 @@ const Entity = ({entity}) => {
   const {
     title,
     table,
-    form,
+    form: {
+      fields,
+      selectedRow,
+    },
     rows,
   } = useSelector(state => state.entities[entity])
   const dispatch = useDispatch()
@@ -56,8 +62,12 @@ const Entity = ({entity}) => {
         sortTable={value => dispatch(sortTable(entity, value))}
         rowClicked={value => dispatch(rowClicked(entity, value))}/>
       <Form
-        form={form}
-        fieldChanged={(field, value) => dispatch(fieldChanged(entity, {field, value}))}/>
+        fields={fields}
+        selectedRow={selectedRow}
+        fieldChanged={(field, value) => dispatch(fieldChanged(entity, {field, value}))}
+        submitForm={() => dispatch(saveItem(entity))}
+        resetForm={() => dispatch(resetForm(entity))}
+        clearForm={() => dispatch(clearForm(entity))}/>
     </Wrapper>
   )
 }

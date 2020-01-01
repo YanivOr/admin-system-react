@@ -9,11 +9,11 @@ import {
 /**
  * Converts an array of object into a hash table
  * 
- * @param {Array} array - array of objects
+ * @param {Array} data - array of objects
  * @param {String} key  - the field for using as a key
  */
-export const arrToHash = (array, key = 'id') => {
-  return array.reduce((obj, item) => {
+export const arrToHash = (data, key = 'id') => {
+  return data.reduce((obj, item) => {
     return {
       ...obj,
       [item[key]]: item,

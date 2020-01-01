@@ -58,7 +58,7 @@ const ButtonsBar = styled.div`
   margin-top: 5px;
   padding-right: 3px;
 
-  & > button:first-child {
+  & > button:not(:last-child) {
     margin-right: 8px;
   }
 
@@ -83,7 +83,16 @@ const Submit = styled.button``
 
 const Reset = styled.button``
 
-const Form = ({form: {fields, selectedRow, fieldChanged}}) => (
+const New = styled.button``
+
+const Form = ({
+  fields,
+  selectedRow,
+  fieldChanged,
+  submitForm,
+  resetForm,
+  clearForm,
+  }) => (
   <Wrapper>
     <FormWrapper>
       {Object.keys(fields).map((field, key) => (
@@ -91,14 +100,15 @@ const Form = ({form: {fields, selectedRow, fieldChanged}}) => (
           key={key}>
           <Label>{fields[field].label}</Label>
           <Input
-            value={selectedRow[field]}
+            value={selectedRow[field] || ''}
             onChange={event => fieldChanged(field, event.target.value)}
             type="text"/>
         </Group>
       ))}
       <ButtonsBar>
-        <Reset>Reset</Reset>
-        <Submit>Submit</Submit>
+        <New onClick={clearForm}>New</New>
+        <Reset onClick={resetForm}>Reset</Reset>
+        <Submit onClick={submitForm}>Submit</Submit>
       </ButtonsBar>
     </FormWrapper>
   </Wrapper>

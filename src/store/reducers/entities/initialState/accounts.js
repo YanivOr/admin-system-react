@@ -1,7 +1,4 @@
 const fields = {
-  id: {
-    label: 'ID'
-  },
   username: {
     label: 'Username'
   },

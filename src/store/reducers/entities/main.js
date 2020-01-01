@@ -6,16 +6,14 @@ import {
   countPages,
 } from './process'
 
-export const getItemsSuccess = (state, entity, { rows }) => {
-  return ({
-    ...state,
-    [entity]: {
-      ...state[entity],
-      rows:
-        arrToHash(rows),
-    }
-  })
-}
+export const getItemsSuccess = (state, entity, { rows }) => ({
+  ...state,
+  [entity]: {
+    ...state[entity],
+    rows:
+      arrToHash(rows),
+  }
+})
 
 export const getItemsStarted = (state) => ({
   ...state
@@ -105,4 +103,41 @@ export const populateForm = (state, entity, { rowId }) => ({
 
 export const updateField = (state, entity, { field, value}) => ({
   ...state,
+  [entity]: {
+    ...state[entity],
+    form: {
+      ...state[entity].form,
+      selectedRow: {
+        ...state[entity].form.selectedRow,
+        [field]: value,
+      },
+    }
+  }
 })
+
+export const resetRowId = (state, entity) => {
+  return ({
+    ...state,
+    [entity]: {
+      ...state[entity],
+      form: {
+        ...state[entity].form,
+        selectedRow: 
+          state[entity].rows[state[entity].form.selectedRow.id]
+      }
+    }
+  })
+}
+
+export const clearRowId = (state, entity) => {
+  return ({
+    ...state,
+    [entity]: {
+      ...state[entity],
+      form: {
+        ...state[entity].form,
+        selectedRow: {}
+      }
+    }
+  })
+}
