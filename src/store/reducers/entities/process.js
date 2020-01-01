@@ -22,7 +22,7 @@ export const arrToHash = (array, key = 'id') => {
 }
 
 /**
- * Returns an array of row ids for a relevant page
+ * Returns an array of row ids for by relevant parameters
  * 
  * @param {Object} rows  - hash table
  * @param {Number} limit - rows in page
