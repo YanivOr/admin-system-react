@@ -1,6 +1,6 @@
 import {
   INIT,
-} from './constants'
+} from '../../../constants/router'
 
 const initialState = {
   routeState: INIT

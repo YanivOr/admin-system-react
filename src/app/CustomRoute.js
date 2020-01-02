@@ -16,7 +16,7 @@ import {
   INIT,
   ROUTE,
   REDIRECT 
-} from '../store/reducers/router/constants'
+} from '../constants/router'
 
 const CustomRoute = (props) => {
   const {
