@@ -1,5 +1,5 @@
-import accounts from './accounts'
-import posts from './posts'
+import accounts from './accounts/index'
+import posts from './posts/index'
 
 export default {
   accounts,

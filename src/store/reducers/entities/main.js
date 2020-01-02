@@ -6,21 +6,39 @@ import {
   countPages,
 } from './process'
 
-export const getItemsSuccess = (state, entity, { rows }) => ({
+export const getItemsSucceeded = (state, entity, { rows }) => ({
   ...state,
   [entity]: {
     ...state[entity],
     rows:
       arrToHash(rows),
+    table: {
+      ...state[entity].table,
+      fetchState: 'SUCCEEDED',
+    }
   }
 })
 
-export const getItemsStarted = (state) => ({
-  ...state
+export const getItemsStarted = (state, entity) => ({
+  ...state,
+  [entity]: {
+    ...state[entity],
+    table: {
+      ...state[entity].table,
+      fetchState: 'STARTED',
+    }
+  }
 })
 
-export const getItemsFailure = (state) => ({
-  ...state
+export const getItemsFailed = (state, entity) => ({
+  ...state,
+  [entity]: {
+    ...state[entity],
+    table: {
+      ...state[entity].table,
+      fetchState: 'FAILED',
+    }
+  }
 })
 
 export const getProcessedItems = (state, entity) => {
@@ -140,4 +158,16 @@ export const clearRowId = (state, entity) => {
       }
     }
   })
+}
+
+export const saveItemSucceeded = (state, entity, payload) => {
+
+}
+
+export const saveItemStarted = (state, entity) => {
+
+}
+
+export const saveItemFailed = (state, entity) => {
+
 }

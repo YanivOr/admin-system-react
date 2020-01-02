@@ -1,8 +1,11 @@
 import initialState from './initialState/index'
 import {
-  GET_ITEMS_SUCCESS,
+  GET_ITEMS_SUCCEEDED,
   GET_ITEMS_STARTED,
-  GET_ITEMS_FAILURE,
+  GET_ITEMS_FAILED,
+  SAVE_ITEM_SUCCEEDED,
+  SAVE_ITEM_STARTED,
+  SAVE_ITEM_FAILED,
   GET_PROCESSED_ITEMS,
   CHANGE_PAGE,
   SORT_TABLE,
@@ -13,9 +16,12 @@ import {
   CLEAR_FORM,
 } from '../../actions/entities/constants'
 import {
-  getItemsSuccess, 
+  getItemsSucceeded, 
   getItemsStarted, 
-  getItemsFailure,
+  getItemsFailed,
+  saveItemSucceeded,
+  saveItemStarted,
+  saveItemFailed,
   getProcessedItems,
   changePage, 
   sortData,
@@ -28,9 +34,12 @@ import {
 
 const entities = (state = initialState, {type, entity, payload}) => {
   switch (type) {
-    case GET_ITEMS_SUCCESS: return getItemsSuccess(state, entity, payload)
-    case GET_ITEMS_STARTED: return getItemsStarted(state)
-    case GET_ITEMS_FAILURE: return getItemsFailure(state)
+    case GET_ITEMS_SUCCEEDED: return getItemsSucceeded(state, entity, payload)
+    case GET_ITEMS_STARTED: return getItemsStarted(state, entity)
+    case GET_ITEMS_FAILED: return getItemsFailed(state, entity)
+    case SAVE_ITEM_SUCCEEDED: return saveItemSucceeded(state, entity, payload)
+    case SAVE_ITEM_STARTED: return saveItemStarted(state, entity)
+    case SAVE_ITEM_FAILED: return saveItemFailed(state, entity)
     case GET_PROCESSED_ITEMS: return getProcessedItems(state, entity)
     case CHANGE_PAGE: return changePage(state, entity, payload)
     case SORT_TABLE: return sortData(state, entity, payload)

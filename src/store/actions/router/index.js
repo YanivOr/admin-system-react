@@ -1,8 +1,8 @@
 import axios from 'axios'
 import {
-  VERIFY_TOKEN_SUCCESS,
+  VERIFY_TOKEN_SUCCEEDED,
   VERIFY_TOKEN_STARTED,
-  VERIFY_TOKEN_FAILURE,
+  VERIFY_TOKEN_FAILED,
   INIT,
 } from './constants'
 import { api } from '../../../config'
@@ -12,7 +12,7 @@ export const handleAuth = ({ location }) => {
   return dispatch => {
     const routeState = fetchToken(location)
     if (routeState === INIT) {
-      dispatch(verifyTokenFailure('No token'))
+      dispatch(verifyTokenFailed('No token'))
       return
     }
     dispatch(verifyTokenStarted())
@@ -21,16 +21,16 @@ export const handleAuth = ({ location }) => {
       .get(api.verifyToken,
           { headers: { Authorization: authHeader() } })
       .then(() => {
-        dispatch(verifyTokenSuccess(routeState))
+        dispatch(verifyTokenSucceeded(routeState))
       })
       .catch(({ message }) => {
-        dispatch(verifyTokenFailure(message))
+        dispatch(verifyTokenFailed(message))
       })
   }
 }
 
-const verifyTokenSuccess = (routeState) => ({
-  type: VERIFY_TOKEN_SUCCESS,
+const verifyTokenSucceeded = (routeState) => ({
+  type: VERIFY_TOKEN_SUCCEEDED,
   payload: {
     routeState
   }
@@ -40,8 +40,8 @@ const verifyTokenStarted = () => ({
   type: VERIFY_TOKEN_STARTED,
 })
 
-const verifyTokenFailure = (error) => ({
-  type: VERIFY_TOKEN_FAILURE,
+const verifyTokenFailed = (error) => ({
+  type: VERIFY_TOKEN_FAILED,
   payload: {
     error
   }

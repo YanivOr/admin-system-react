@@ -1,20 +1,20 @@
 import initialState from './initialState'
 import {
-  VERIFY_TOKEN_SUCCESS,
+  VERIFY_TOKEN_SUCCEEDED,
   VERIFY_TOKEN_STARTED,
-  VERIFY_TOKEN_FAILURE,
+  VERIFY_TOKEN_FAILED,
 } from '../../actions/router/constants'
 import {
-  verifyTokenSuccess,
+  verifyTokenSucceeded,
   verifyTokenStarted,
-  verifyTokenFailure,
+  verifyTokenFailed,
 } from './main'
 
 const entity = (state = initialState, {type, payload}) => {
   switch (type) {
-    case VERIFY_TOKEN_SUCCESS: return verifyTokenSuccess(state, payload)
+    case VERIFY_TOKEN_SUCCEEDED: return verifyTokenSucceeded(state, payload)
     case VERIFY_TOKEN_STARTED: return verifyTokenStarted(state, payload)
-    case VERIFY_TOKEN_FAILURE: return verifyTokenFailure(state, payload)
+    case VERIFY_TOKEN_FAILED: return verifyTokenFailed(state, payload)
     default:
       return state
   }

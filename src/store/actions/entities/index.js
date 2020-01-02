@@ -1,10 +1,10 @@
 import { 
-  GET_ITEMS_SUCCESS, 
+  GET_ITEMS_SUCCEEDED, 
   GET_ITEMS_STARTED, 
-  GET_ITEMS_FAILURE,
-  SAVE_ITEM_SUCCESS,
+  GET_ITEMS_FAILED,
+  SAVE_ITEM_SUCCEEDED,
   SAVE_ITEM_STARTED,
-  SAVE_ITEM_FAILURE,
+  SAVE_ITEM_FAILED,
   GET_PROCESSED_ITEMS,
   CHANGE_PAGE,
   SORT_TABLE,
@@ -22,11 +22,11 @@ export const getItems = (entity) => {
 
     try {
       const data = await apiRequest(entity)
-      dispatch(getItemsSuccess(entity, data))
+      dispatch(getItemsSucceeded(entity, data))
       dispatch(getProcessedItems(entity))
     }
     catch (message) {
-      dispatch(getItemsFailure(entity, message))
+      dispatch(getItemsFailed(entity, message))
     }
   }
 }
@@ -38,10 +38,10 @@ export const saveItem = (entity) => {
     try {
       const { selectedRow } = getState().entities[entity].form
       const data = await apiRequest(entity, selectedRow)
-      dispatch(saveItemSuccess(entity, data))
+      dispatch(saveItemSucceeded(entity, data))
     }
     catch (message) {
-      dispatch(saveItemFailure(entity, message))
+      dispatch(saveItemFailed(entity, message))
     }
   }
 }
@@ -130,8 +130,8 @@ export const clearForm = (entity) => {
   }
 }
 
-const getItemsSuccess = (entity ,data) => ({
-  type: GET_ITEMS_SUCCESS,
+const getItemsSucceeded = (entity ,data) => ({
+  type: GET_ITEMS_SUCCEEDED,
   entity,
   payload: {
     ...data
@@ -143,8 +143,8 @@ const getItemsStarted = (entity) => ({
   entity
 })
 
-const getItemsFailure = (entity, error) => ({
-  type: GET_ITEMS_FAILURE,
+const getItemsFailed = (entity, error) => ({
+  type: GET_ITEMS_FAILED,
   entity,
   payload: {
     error
@@ -157,8 +157,8 @@ const getProcessedItems = (entity) => ({
   payload: {} 
 })
 
-const saveItemSuccess = (entity ,data) => ({
-  type: SAVE_ITEM_SUCCESS,
+const saveItemSucceeded = (entity ,data) => ({
+  type: SAVE_ITEM_SUCCEEDED,
   entity,
   payload: {
     ...data
@@ -170,8 +170,8 @@ const saveItemStarted = (entity) => ({
   entity
 })
 
-const saveItemFailure = (entity, error) => ({
-  type: SAVE_ITEM_FAILURE,
+const saveItemFailed = (entity, error) => ({
+  type: SAVE_ITEM_FAILED,
   entity,
   payload: {
     error
