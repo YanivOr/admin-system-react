@@ -4,7 +4,7 @@ import {
   VERIFY_TOKEN_STARTED,
   VERIFY_TOKEN_FAILED,
   INIT,
-} from './constants'
+} from '../../../constants/router'
 import { api } from '../../../config'
 import { fetchToken, authHeader } from '../../../services/auth'
 

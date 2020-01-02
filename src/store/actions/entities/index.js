@@ -13,7 +13,7 @@ import {
   FIELD_CHANGED,
   RESET_FORM,
   CLEAR_FORM,
-} from './constants'
+} from '../../../constants/entities'
 import { apiRequest } from '../../../services/api'
 
 export const getItems = (entity) => {

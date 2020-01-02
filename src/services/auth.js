@@ -3,7 +3,7 @@ import {
   INIT,
   ROUTE,
   REDIRECT
-} from '../store/actions/router/constants'
+} from '../constants/router'
 
 export const authHeader = () => {
   return `Bearer ${storageGet('token')}`

@@ -14,7 +14,7 @@ import {
   FIELD_CHANGED,
   RESET_FORM,
   CLEAR_FORM,
-} from '../../actions/entities/constants'
+} from '../../../constants/entities'
 import {
   getItemsSucceeded, 
   getItemsStarted, 
