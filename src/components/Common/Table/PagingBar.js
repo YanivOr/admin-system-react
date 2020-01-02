@@ -110,7 +110,7 @@ const PagingBar = ({page, pagesCount, changePage}) => (
       src={require(`../../../assets/refresh-24px.svg`)}/>
     <PageDropdown onChange={event => changePage(event.target.value)}>
       {pagesCount && Array(pagesCount).fill(0).map((_, key) => (
-        <Option>{key + 1}</Option>
+        <Option selected={page - 1 === key}>{key + 1}</Option>
       ))}
     </PageDropdown>
   </Wrapper>
