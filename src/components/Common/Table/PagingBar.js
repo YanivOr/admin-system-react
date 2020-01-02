@@ -7,7 +7,7 @@ import {
   GO_TO_NEXT_PAGE,
   GO_TO_LAST_PAGE,
   REFRESH,
-} from '../../../constants/table'
+} from '../../../constants/entities'
 
 const Wrapper = styled.div`
   display: flex;

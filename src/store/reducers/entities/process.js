@@ -4,7 +4,7 @@ import {
   GO_TO_NEXT_PAGE,
   GO_TO_LAST_PAGE,
   REFRESH,
-} from '../../../constants/table'
+} from '../../../constants/entities'
 
 /**
  * Converts an array of object into a hash table
