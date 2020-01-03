@@ -172,7 +172,7 @@ export const saveItemSucceeded = (state, entity, { row }) => ({
     },
     rows: {
       ...state[entity].rows,
-      [state[entity].form.selectedRow.id || row.id]: row,
+      [row.id]: row,
     }
   }
 })

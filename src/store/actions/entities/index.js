@@ -31,22 +31,6 @@ export const getItems = (entity) => {
   }
 }
 
-export const saveItem = (entity) => {
-  return async (dispatch, getState) => {
-    dispatch(saveItemStarted(entity))
-
-    try {
-      const { selectedRow } = getState().entities[entity].form
-      const data = await apiRequest(entity, selectedRow)
-      dispatch(saveItemSucceeded(entity, data))
-      dispatch(getProcessedItems(entity))
-    }
-    catch (message) {
-      dispatch(saveItemFailed(entity, message))
-    }
-  }
-}
-
 export const changePage = (entity, action) => {
   return dispatch => {
     dispatch({
@@ -157,6 +141,23 @@ const getProcessedItems = (entity) => ({
   entity,
   payload: {} 
 })
+
+
+export const saveItem = (entity) => {
+  return async (dispatch, getState) => {
+    dispatch(saveItemStarted(entity))
+
+    try {
+      const { selectedRow } = getState().entities[entity].form
+      const data = await apiRequest(entity, selectedRow)
+      dispatch(saveItemSucceeded(entity, data))
+      dispatch(getProcessedItems(entity))
+    }
+    catch (message) {
+      dispatch(saveItemFailed(entity, message))
+    }
+  }
+}
 
 const saveItemStarted = (entity) => ({
   type: SAVE_ITEM_STARTED,

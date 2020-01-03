@@ -6,7 +6,7 @@ const common = {
     pagesCount: 0,
     q: '',
     sort: {
-      updatedAt: -1
+      createdAt: -1
     },
     rowIds: [],
     fetchState: null,
