@@ -1,11 +1,11 @@
 import table from './table'
 import form from './form'
+import common from '../common'
 
-const posts = {
+let posts = {
   title: 'Posts',
-  table,
-  form,
-  rows: {},
+  table: {...table, ...common.table},
+  form: {...form, ...common.form},
 }
 
 export default posts

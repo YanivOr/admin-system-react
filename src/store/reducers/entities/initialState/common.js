@@ -2,10 +2,12 @@ const common = {
   table: {
     count: 0,
     page: 1,
-    limit: 5,
+    limit: 50,
     pagesCount: 0,
     q: '',
-    sort: {},
+    sort: {
+      updatedAt: -1
+    },
     rowIds: [],
     fetchState: null,
   },

@@ -6,6 +6,23 @@ import {
   countPages,
 } from './process'
 
+import {
+  STARTED,
+  SUCCEEDED,
+  FAILED,
+} from '../../../constants/api'
+
+export const getItemsStarted = (state, entity) => ({
+  ...state,
+  [entity]: {
+    ...state[entity],
+    table: {
+      ...state[entity].table,
+      fetchState: STARTED,
+    }
+  }
+})
+
 export const getItemsSucceeded = (state, entity, { rows }) => ({
   ...state,
   [entity]: {
@@ -14,18 +31,7 @@ export const getItemsSucceeded = (state, entity, { rows }) => ({
       arrToHash(rows),
     table: {
       ...state[entity].table,
-      fetchState: 'SUCCEEDED',
-    }
-  }
-})
-
-export const getItemsStarted = (state, entity) => ({
-  ...state,
-  [entity]: {
-    ...state[entity],
-    table: {
-      ...state[entity].table,
-      fetchState: 'STARTED',
+      fetchState: SUCCEEDED,
     }
   }
 })
@@ -36,7 +42,7 @@ export const getItemsFailed = (state, entity) => ({
     ...state[entity],
     table: {
       ...state[entity].table,
-      fetchState: 'FAILED',
+      fetchState: FAILED,
     }
   }
 })
@@ -60,53 +66,41 @@ export const getProcessedItems = (state, entity) => {
   })
 }
 
-export const changePage = (state, entity, { action }) => {
-  const { table, table: { limit, page, count }} = state[entity]
- 
-  return ({
-    ...state,
-    [entity]: {
-      ...state[entity],
-      table: {
-        ...table,
-        page:
-          getPage(action, page, limit, count)
-      },
-    }
-  })
-}
+export const changePage = (state, entity, { action }) => ({
+  ...state,
+  [entity]: {
+    ...state[entity],
+    table: {
+      ...state[entity].table,
+      page:
+        getPage(action, state[entity].table.page, state[entity].table.limit, state[entity].table.count)
+    },
+  }
+})
 
-export const sortData = (state, entity, { field }) => {
-  const { table ,table :{ sort }}  = state[entity]
-
-  return {
-    ...state,
-    [entity]: {
-      ...state[entity],
-      table: {
-        ...table,
-        sort: 
-          updateSortObject(sort, field),
-      }
+export const sortData = (state, entity, { field }) => ({
+  ...state,
+  [entity]: {
+    ...state[entity],
+    table: {
+      ...state[entity].table,
+      sort: 
+        updateSortObject(state[entity].table.sort, field),
     }
   }
-}
+})
 
-export const searchData = (state, entity, { q }) => {
-  const { table }  = state[entity]
-
-  return {
-    ...state,
-    [entity]: {
-      ...state[entity],
-      table: {
-        ...table,
-        q,
-        page: 1,
-      }
+export const searchData = (state, entity, { q }) => ({
+  ...state,
+  [entity]: {
+    ...state[entity],
+    table: {
+      ...state[entity].table,
+      q,
+      page: 1,
     }
   }
-}
+})
 
 export const populateForm = (state, entity, { rowId }) => ({
   ...state,
@@ -133,41 +127,63 @@ export const updateField = (state, entity, { field, value}) => ({
   }
 })
 
-export const resetRowId = (state, entity) => {
-  return ({
-    ...state,
-    [entity]: {
-      ...state[entity],
-      form: {
-        ...state[entity].form,
-        selectedRow: 
-          state[entity].rows[state[entity].form.selectedRow.id]
-      }
+export const resetRowId = (state, entity) => ({
+  ...state,
+  [entity]: {
+    ...state[entity],
+    form: {
+      ...state[entity].form,
+      selectedRow: 
+        state[entity].rows[state[entity].form.selectedRow.id]
     }
-  })
-}
+  }
+})
 
-export const clearRowId = (state, entity) => {
-  return ({
-    ...state,
-    [entity]: {
-      ...state[entity],
-      form: {
-        ...state[entity].form,
-        selectedRow: {}
-      }
+export const clearRowId = (state, entity) => ({
+  ...state,
+  [entity]: {
+    ...state[entity],
+    form: {
+      ...state[entity].form,
+      selectedRow: {}
     }
-  })
-}
+  }
+})
 
-export const saveItemSucceeded = (state, entity, payload) => {
+export const saveItemStarted = (state, entity) => ({
+  ...state,
+  [entity]: {
+    ...state[entity],
+    form: {
+      ...state[entity].form,
+      saveState: STARTED,
+    }
+  }
+})
 
-}
+export const saveItemSucceeded = (state, entity, { row }) => ({
+  ...state,
+  [entity]: {
+    ...state[entity],
+    form: {
+      ...state[entity].form,
+      selectedRow: row,
+      saveState: SUCCEEDED,
+    },
+    rows: {
+      ...state[entity].rows,
+      [state[entity].form.selectedRow.id || row.id]: row,
+    }
+  }
+})
 
-export const saveItemStarted = (state, entity) => {
-
-}
-
-export const saveItemFailed = (state, entity) => {
-
-}
+export const saveItemFailed = (state, entity) => ({
+  ...state,
+  [entity]: {
+    ...state[entity],
+    form: {
+      ...state[entity].form,
+      saveState: FAILED,
+    }
+  }
+})

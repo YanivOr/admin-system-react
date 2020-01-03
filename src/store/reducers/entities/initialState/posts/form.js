@@ -13,7 +13,6 @@ const form = {
       label: 'Thumbnail'
     },
   },
-  selectedRow: {},
 }
 
 export default form
