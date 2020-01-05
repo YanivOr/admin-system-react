@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Entity from './Entity'
+import Entity from '../Common/Entity'
 
 const Wrapper = styled.div``
 

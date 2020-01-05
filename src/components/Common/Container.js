@@ -1,20 +1,19 @@
-import React from "react"
+import React from 'react'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-  margin: 0 auto 20px auto;
-  width: 98%;
-  height: 70px;
+  flex: auto;
   background: #333333;
   color: #dddddd;
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  display: none;
+  margin: 20px;
+  padding: 20px;
 `
 
-const Footer = () => (
+const Container = ({children}) => (
   <Wrapper>
-
+    {children}
   </Wrapper>
 )
 
-export default Footer
+export default Container

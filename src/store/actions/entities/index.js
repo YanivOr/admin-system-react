@@ -16,103 +16,87 @@ import {
 } from '../../../constants/entities'
 import { apiRequest } from '../../../services/api'
 
-export const getItems = (entity) => {
-  return async dispatch => {
-    dispatch(getItemsStarted(entity))
+export const getItems = (entity) => async dispatch => {
+  dispatch(getItemsStarted(entity))
 
-    try {
-      const data = await apiRequest(entity)
-      dispatch(getItemsSucceeded(entity, data))
-      dispatch(getProcessedItems(entity))
+  try {
+    const data = await apiRequest(entity)
+    dispatch(getItemsSucceeded(entity, data))
+    dispatch(getProcessedItems(entity))
+  }
+  catch (message) {
+    dispatch(getItemsFailed(entity, message))
+  }
+}
+
+export const changePage = (entity, action) => dispatch => {
+  dispatch({
+    type: CHANGE_PAGE,
+    entity,
+    payload: {
+      action
     }
-    catch (message) {
-      dispatch(getItemsFailed(entity, message))
+  })
+  dispatch(getProcessedItems(entity))
+}
+
+export const sortTable = (entity, field) => dispatch => {
+  dispatch({
+    type: SORT_TABLE,
+    entity,
+    payload: {
+      field
     }
-  }
+  })
+  dispatch(getProcessedItems(entity))
 }
 
-export const changePage = (entity, action) => {
-  return dispatch => {
-    dispatch({
-      type: CHANGE_PAGE,
-      entity,
-      payload: {
-        action
-      }
-    })
-    dispatch(getProcessedItems(entity))
-  }
+export const searchTable = (entity, q) => dispatch => {
+  dispatch({
+    type: SEARCH_TABLE,
+    entity,
+    payload: {
+      q
+    }
+  })
+  dispatch(getProcessedItems(entity))
 }
 
-export const sortTable = (entity, field) => {
-  return dispatch => {
-    dispatch({
-      type: SORT_TABLE,
-      entity,
-      payload: {
-        field
-      }
-    })
-    dispatch(getProcessedItems(entity))
-  }
+export const rowClicked = (entity, rowId) => dispatch => {
+  dispatch({
+    type: ROW_CLICKED,
+    entity,
+    payload: {
+      rowId
+    }
+  })
 }
 
-export const searchTable = (entity, q) => {
-  return dispatch => {
-    dispatch({
-      type: SEARCH_TABLE,
-      entity,
-      payload: {
-        q
-      }
-    })
-    dispatch(getProcessedItems(entity))
-  }
+export const fieldChanged = (entity, {field, value}) => dispatch => {
+  dispatch({
+    type: FIELD_CHANGED,
+    entity,
+    payload: {
+      field,
+      value,
+    }
+  })
 }
 
-export const rowClicked = (entity, rowId) => {
-  return dispatch => {
-    dispatch({
-      type: ROW_CLICKED,
-      entity,
-      payload: {
-        rowId
-      }
-    })
-  }
+export const resetForm = (entity) => dispatch => {
+  dispatch({
+    type: RESET_FORM,
+    entity,
+    payload: {}
+  })
 }
 
-export const fieldChanged = (entity, {field, value}) => {
-  return dispatch => {
-    dispatch({
-      type: FIELD_CHANGED,
-      entity,
-      payload: {
-        field,
-        value,
-      }
-    })
-  }
-}
-
-export const resetForm = (entity) => {
-  return dispatch => {
-    dispatch({
-      type: RESET_FORM,
-      entity,
-      payload: {}
-    })
-  }
-}
-
-export const clearForm = (entity) => {
-  return dispatch => {
-    dispatch({
-      type: CLEAR_FORM,
-      entity,
-      payload: {}
-    })
-  }
+export const clearForm = (entity) => dispatch => {
+  dispatch({
+    type: CLEAR_FORM,
+    entity,
+    payload: {}
+  })
 }
 
 const getItemsStarted = (entity) => ({
@@ -143,19 +127,17 @@ const getProcessedItems = (entity) => ({
 })
 
 
-export const saveItem = (entity) => {
-  return async (dispatch, getState) => {
-    dispatch(saveItemStarted(entity))
+export const saveItem = (entity) => async (dispatch, getState) => {
+  dispatch(saveItemStarted(entity))
 
-    try {
-      const { selectedRow } = getState().entities[entity].form
-      const data = await apiRequest(entity, selectedRow)
-      dispatch(saveItemSucceeded(entity, data))
-      dispatch(getProcessedItems(entity))
-    }
-    catch (message) {
-      dispatch(saveItemFailed(entity, message))
-    }
+  try {
+    const { selectedRow } = getState().entities[entity].form
+    const data = await apiRequest(entity, selectedRow)
+    dispatch(saveItemSucceeded(entity, data))
+    dispatch(getProcessedItems(entity))
+  }
+  catch (message) {
+    dispatch(saveItemFailed(entity, message))
   }
 }
 

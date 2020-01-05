@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import styled from 'styled-components'
 import Header from './Header'
-import Footer from './Footer'
 import Menu from '../General/Menu'
 import Content from './Content'
 
@@ -52,7 +51,6 @@ const Layout = ({children}) => {
         <Content>
           {children}
         </Content>
-        <Footer></Footer>
       </Wrapper>
   )
 }

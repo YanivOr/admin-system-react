@@ -134,7 +134,7 @@ export const resetRowId = (state, entity) => ({
     form: {
       ...state[entity].form,
       selectedRow: 
-        state[entity].rows[state[entity].form.selectedRow.id]
+        state[entity].rows[state[entity].form.selectedRow.id] || {}
     }
   }
 })

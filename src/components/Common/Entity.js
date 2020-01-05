@@ -11,9 +11,14 @@ import {
   resetForm,
   clearForm,
 } from '../../store/actions/entities'
-import { Sticker } from '../Common/Sticker'
-import Table from '../Common/Table'
-import Form from '../Common/Form'
+import {
+  gridRowClicked,
+} from '../../store/actions/gridEditor'
+import Container from './Container'
+import { Sticker } from './Sticker'
+import Table from './Table'
+import Form from './Form'
+import GridEditor from './GridEditor'
 
 const Wrapper = styled.div``
 
@@ -49,25 +54,35 @@ const Entity = ({entity}) => {
 
   return (
     <Wrapper>
+      <Container>
       <TopBar>
         <Sticker>{title}</Sticker>
         <Search
           onChange={event => dispatch(searchTable(entity, event.target.value.trim()))}
           placeholder="search the table"/>
       </TopBar>
-      <Table
-        rows={rows}
-        table={table}
-        changePage={value => dispatch(changePage(entity, value))}
-        sortTable={value => dispatch(sortTable(entity, value))}
-        rowClicked={value => dispatch(rowClicked(entity, value))}/>
-      <Form
-        fields={fields}
-        selectedRow={selectedRow}
-        fieldChanged={(field, value) => dispatch(fieldChanged(entity, {field, value}))}
-        submitForm={() => dispatch(saveItem(entity))}
-        resetForm={() => dispatch(resetForm(entity))}
-        clearForm={() => dispatch(clearForm(entity))}/>
+      </Container>
+      <Container>
+        <Table
+          rows={rows}
+          table={table}
+          changePage={value => dispatch(changePage(entity, value))}
+          sortTable={value => dispatch(sortTable(entity, value))}
+          rowClicked={value => dispatch(rowClicked(entity, value))}/>
+      </Container>
+      <Container>
+        <GridEditor
+          rowClicked={() => dispatch(gridRowClicked(entity))}/>
+      </Container>
+      <Container>
+        <Form
+          fields={fields}
+          selectedRow={selectedRow}
+          fieldChanged={(field, value) => dispatch(fieldChanged(entity, {field, value}))}
+          submitForm={() => dispatch(saveItem(entity))}
+          resetForm={() => dispatch(resetForm(entity))}
+          clearForm={() => dispatch(clearForm(entity))}/>
+      </Container>
     </Wrapper>
   )
 }

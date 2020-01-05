@@ -2,7 +2,7 @@ const common = {
   table: {
     count: 0,
     page: 1,
-    limit: 50,
+    limit: 10,
     pagesCount: 0,
     q: '',
     sort: {

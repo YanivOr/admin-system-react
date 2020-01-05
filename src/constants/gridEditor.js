@@ -1,0 +1,1 @@
+export const GRID_ROW_CLICKED = 'GRID_ROW_CLICKED'
