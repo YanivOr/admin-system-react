@@ -74,7 +74,8 @@ const Entity = ({entity}) => {
       </Board>
       <Board>
         <GridEditor
-          rowClicked={() => dispatch(gridRowClicked(entity))}/>
+          rowClicked={(event) => dispatch(
+            gridRowClicked(entity, event.target.getBoundingClientRect()))}/>
       </Board>
       <Board>
         <Form

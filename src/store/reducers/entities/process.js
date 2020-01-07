@@ -130,4 +130,3 @@ export const updateSortObject = (sort, field) => {
 
   return sortObj
 }
-
