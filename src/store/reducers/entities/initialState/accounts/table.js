@@ -1,4 +1,5 @@
 const table = {
+  enabled: true,
   fields: {
     username: {
       label: 'Username'

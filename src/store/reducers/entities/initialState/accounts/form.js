@@ -1,4 +1,5 @@
 const form = {
+  enabled: true,
   fields: {
     username: {
       label: 'Username'

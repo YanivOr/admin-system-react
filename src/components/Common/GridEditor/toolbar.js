@@ -11,7 +11,6 @@ const Wrapper = styled.div`
   background: #cccccc;
   color: #222222;
   font-weight: bold;
-  width: 400px;
   height: 80px;
   border: 0px;
   padding: 0px 20px;
@@ -19,7 +18,7 @@ const Wrapper = styled.div`
   cursor: pointer;
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   
-  & > * {
+  & > *:not(:last-child) {
     margin-right: 20px;
   }
 `

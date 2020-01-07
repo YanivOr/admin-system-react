@@ -1,11 +1,12 @@
 import table from './table'
 import form from './form'
-import common from '../common'
+import gridEditor from './gridEditor'
 
 let posts = {
   title: 'Posts',
-  table: {...table, ...common.table},
-  form: {...form, ...common.form},
+  table,
+  form,
+  gridEditor
 }
 
 export default posts

@@ -1,4 +1,5 @@
 const form = {
+  enabled: false,
   fields: {
     title: {
       label: 'Title'

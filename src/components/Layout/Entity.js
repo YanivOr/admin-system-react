@@ -51,13 +51,8 @@ const Entity = ({entity}) => {
   const {
     title,
     table,
-    form: {
-      fields,
-      selectedRow,
-    },
-    gridEditor: {
-      selectedGridRow,
-    },
+    form,
+    gridEditor,
     rows,
   } = useSelector(state => state.entities[entity])
   const dispatch = useDispatch()
@@ -72,39 +67,45 @@ const Entity = ({entity}) => {
           placeholder="search the table"/>
       </TopBar>
       </Board>
-      <Board>
-        <Table
-          rows={rows}
-          table={table}
-          changePage={value => dispatch(changePage(entity, value))}
-          sortTable={value => dispatch(sortTable(entity, value))}
-          rowClicked={value => dispatch(rowClicked(entity, value))}/>
-      </Board>
-      <Board>
-        <GridEditor
-          selectedGridRow={selectedGridRow}
-          rowClicked={(event) => dispatch(
-            gridRowClicked(entity, {
-              boundingRect: getAbsoluteBoundingRect(event.target),
-              clickEventData: {
-                x: event.clientX,
-                y: event.clientY,
-              }
-            }))}
-          onLeaveGridRow={() => dispatch(hideToolbar(entity))}
-          toolbarEdit={() => dispatch(toolbarEdit(entity))}
-          toolbarImage={() => dispatch(toolbarImage(entity))}
-          toolbarVideo={() => dispatch(toolbarVideo(entity))}/>
-      </Board>
-      <Board>
-        <Form
-          fields={fields}
-          selectedRow={selectedRow}
-          fieldChanged={(field, value) => dispatch(fieldChanged(entity, {field, value}))}
-          submitForm={() => dispatch(saveItem(entity))}
-          resetForm={() => dispatch(resetForm(entity))}
-          clearForm={() => dispatch(clearForm(entity))}/>
-      </Board>
+      {table.enabled && 
+        <Board>
+          <Table
+            rows={rows}
+            table={table}
+            changePage={value => dispatch(changePage(entity, value))}
+            sortTable={value => dispatch(sortTable(entity, value))}
+            rowClicked={value => dispatch(rowClicked(entity, value))}/>
+        </Board>
+      }
+      {gridEditor.enabled &&
+        <Board>
+          <GridEditor
+            selectedGridRow={gridEditor.selectedGridRow}
+            rowClicked={(event) => dispatch(
+              gridRowClicked(entity, {
+                boundingRect: getAbsoluteBoundingRect(event.target),
+                clickEventData: {
+                  x: event.clientX,
+                  y: event.clientY,
+                }
+              }))}
+            onLeaveGridRow={() => dispatch(hideToolbar(entity))}
+            toolbarEdit={() => dispatch(toolbarEdit(entity))}
+            toolbarImage={() => dispatch(toolbarImage(entity))}
+            toolbarVideo={() => dispatch(toolbarVideo(entity))}/>
+        </Board>
+      }
+      {form.enabled && 
+        <Board>
+          <Form
+            fields={form.fields}
+            selectedRow={form.selectedRow}
+            fieldChanged={(field, value) => dispatch(fieldChanged(entity, {field, value}))}
+            submitForm={() => dispatch(saveItem(entity))}
+            resetForm={() => dispatch(resetForm(entity))}
+            clearForm={() => dispatch(clearForm(entity))}/>
+        </Board>
+      }
     </Wrapper>
   )
 }
