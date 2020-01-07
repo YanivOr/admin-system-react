@@ -19,6 +19,7 @@ import {
 } from '../../actions/entities/form/types'
 import {
   GRID_ROW_CLICKED,
+  HIDE_TOOLBAR,
 } from '../../actions/entities/gridEditor/types'
 import {
   getItemsSucceeded, 
@@ -40,6 +41,7 @@ import {
 } from './main/form'
 import {
   gridRowClicked,
+  hideToolbar,
 } from './main/gridEditor'
 
 const entities = (state = initialState, {type, entity, payload}) => {
@@ -65,7 +67,8 @@ const entities = (state = initialState, {type, entity, payload}) => {
 
     // GridEditor
     case GRID_ROW_CLICKED: return gridRowClicked(state, entity, payload)
-    
+    case HIDE_TOOLBAR: return hideToolbar(state, entity)
+
     default:
       return state
   }

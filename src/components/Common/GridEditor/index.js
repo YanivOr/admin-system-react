@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Toolbar from './toolbar'
 
 const Wrapper = styled.div`
   flex: auto;
@@ -36,21 +37,24 @@ const Row = styled.div`
   }
 `
 
-const Toolbar = styled.div`
-  position: absolute;
-  top: 0px;
-  background: #cccccc;
-  color: #222222;
-  font-weight: bold;
-  width: 300px;
-  height: 80px;
-  border: 0px;
-  padding: 0px 00px;
-  margin: 0px 0px 0px 0px;
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-`
-
-const GridEditor = ({rowClicked}) => (
+const GridEditor = ({
+  selectedGridRow: {
+    boundingRect: {
+      top 
+    }, 
+    clickEventData: {
+      x 
+    },
+    toolbar: {
+      display,
+    },
+  }, 
+  rowClicked,
+  onLeaveGridRow,
+  toolbarEdit,
+  toolbarImage,
+  toolbarVideo,
+}) => (
   <Wrapper>
     <Title
       placeholder="enter a title"/>
@@ -60,7 +64,14 @@ const GridEditor = ({rowClicked}) => (
           onClick={rowClicked}/>
       ))}
     </GridWrapper>
-    <Toolbar/>
+    <Toolbar
+      top={top}
+      left={x}
+      display={display}
+      onMouseLeave={onLeaveGridRow}
+      toolbarEdit={toolbarEdit}
+      toolbarImage={toolbarImage}
+      toolbarVideo={toolbarVideo}/>
   </Wrapper>
 )
 

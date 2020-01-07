@@ -15,7 +15,12 @@ import {
 } from '../../store/actions/entities/form/index'
 import {
   gridRowClicked,
+  hideToolbar,
+  toolbarEdit,
+  toolbarImage,
+  toolbarVideo,
 } from '../../store/actions/entities/gridEditor/index'
+import { getAbsoluteBoundingRect } from '../../services/dom'
 import Board from '../Common/Board'
 import { Sticker } from '../Common/Sticker'
 import Table from '../Common/Table'
@@ -50,6 +55,9 @@ const Entity = ({entity}) => {
       fields,
       selectedRow,
     },
+    gridEditor: {
+      selectedGridRow,
+    },
     rows,
   } = useSelector(state => state.entities[entity])
   const dispatch = useDispatch()
@@ -74,8 +82,19 @@ const Entity = ({entity}) => {
       </Board>
       <Board>
         <GridEditor
+          selectedGridRow={selectedGridRow}
           rowClicked={(event) => dispatch(
-            gridRowClicked(entity, event.target.getBoundingClientRect()))}/>
+            gridRowClicked(entity, {
+              boundingRect: getAbsoluteBoundingRect(event.target),
+              clickEventData: {
+                x: event.clientX,
+                y: event.clientY,
+              }
+            }))}
+          onLeaveGridRow={() => dispatch(hideToolbar(entity))}
+          toolbarEdit={() => dispatch(toolbarEdit(entity))}
+          toolbarImage={() => dispatch(toolbarImage(entity))}
+          toolbarVideo={() => dispatch(toolbarVideo(entity))}/>
       </Board>
       <Board>
         <Form
