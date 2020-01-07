@@ -10,10 +10,10 @@ const Wrapper = styled.div`
   padding: 20px;
 `
 
-const Container = ({children}) => (
+const Board = ({children}) => (
   <Wrapper>
     {children}
   </Wrapper>
 )
 
-export default Container
+export default Board

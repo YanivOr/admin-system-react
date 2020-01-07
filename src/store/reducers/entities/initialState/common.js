@@ -15,6 +15,9 @@ const common = {
     selectedRow: {},
     saveState: null,
   },
+  gridEditor: {
+    pos: [0, 0],
+  },
   rows: {},
 }
 

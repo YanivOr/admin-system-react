@@ -6,19 +6,21 @@ import {
   sortTable,
   searchTable,
   rowClicked,
+} from '../../store/actions/entities/table/index'
+import {
   fieldChanged,
   saveItem,
   resetForm,
   clearForm,
-} from '../../store/actions/entities'
+} from '../../store/actions/entities/form/index'
 import {
   gridRowClicked,
-} from '../../store/actions/gridEditor'
-import Container from './Container'
-import { Sticker } from './Sticker'
-import Table from './Table'
-import Form from './Form'
-import GridEditor from './GridEditor'
+} from '../../store/actions/entities/gridEditor/index'
+import Board from '../Common/Board'
+import { Sticker } from '../Common/Sticker'
+import Table from '../Common/Table'
+import Form from '../Common/Form'
+import GridEditor from '../Common/GridEditor'
 
 const Wrapper = styled.div``
 
@@ -54,27 +56,27 @@ const Entity = ({entity}) => {
 
   return (
     <Wrapper>
-      <Container>
+      <Board>
       <TopBar>
         <Sticker>{title}</Sticker>
         <Search
           onChange={event => dispatch(searchTable(entity, event.target.value.trim()))}
           placeholder="search the table"/>
       </TopBar>
-      </Container>
-      <Container>
+      </Board>
+      <Board>
         <Table
           rows={rows}
           table={table}
           changePage={value => dispatch(changePage(entity, value))}
           sortTable={value => dispatch(sortTable(entity, value))}
           rowClicked={value => dispatch(rowClicked(entity, value))}/>
-      </Container>
-      <Container>
+      </Board>
+      <Board>
         <GridEditor
           rowClicked={() => dispatch(gridRowClicked(entity))}/>
-      </Container>
-      <Container>
+      </Board>
+      <Board>
         <Form
           fields={fields}
           selectedRow={selectedRow}
@@ -82,7 +84,7 @@ const Entity = ({entity}) => {
           submitForm={() => dispatch(saveItem(entity))}
           resetForm={() => dispatch(resetForm(entity))}
           clearForm={() => dispatch(clearForm(entity))}/>
-      </Container>
+      </Board>
     </Wrapper>
   )
 }

@@ -6,7 +6,7 @@ import {
   Redirect
 } from 'react-router-dom'
 import { handleAuth } from '../store/actions/router'
-import { getItems } from '../store/actions/entities'
+import { getItems } from '../store/actions/entities/table/index'
 import Layout from '../components/Layout'
 import Loading from '../components/Common/Loading'
 import Dashboard from '../components/Views/Dashboard'

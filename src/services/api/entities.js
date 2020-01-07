@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { api } from '../config'
-import { authHeader } from './auth'
+import { api } from '../../config'
+import { authHeader } from '../auth'
 
 const headers = {
   headers: { Authorization: authHeader() } 

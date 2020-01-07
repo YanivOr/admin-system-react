@@ -3,18 +3,20 @@ import {
   GET_ITEMS_SUCCEEDED,
   GET_ITEMS_STARTED,
   GET_ITEMS_FAILED,
-  SAVE_ITEM_SUCCEEDED,
-  SAVE_ITEM_STARTED,
-  SAVE_ITEM_FAILED,
   GET_PROCESSED_ITEMS,
   CHANGE_PAGE,
   SORT_TABLE,
   SEARCH_TABLE,
   ROW_CLICKED,
+} from '../../actions/entities/table/types'
+import {
+  SAVE_ITEM_SUCCEEDED,
+  SAVE_ITEM_STARTED,
+  SAVE_ITEM_FAILED,
   FIELD_CHANGED,
   RESET_FORM,
   CLEAR_FORM,
-} from '../../../constants/entities'
+} from '../../actions/entities/form/types'
 import {
   getItemsSucceeded, 
   getItemsStarted, 

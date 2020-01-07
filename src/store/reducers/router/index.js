@@ -3,7 +3,7 @@ import {
   VERIFY_TOKEN_SUCCEEDED,
   VERIFY_TOKEN_STARTED,
   VERIFY_TOKEN_FAILED,
-} from '../../../constants/router'
+} from '../../actions/router/types'
 import {
   verifyTokenSucceeded,
   verifyTokenStarted,
