@@ -1,6 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import Toolbar from './toolbar'
+import EditForm from './editForm'
+import {
+  TEXT,
+} from '../../../constants/entities'
 
 const Wrapper = styled.div`
   flex: auto;
@@ -38,40 +42,63 @@ const Row = styled.div`
 `
 
 const GridEditor = ({
-  selectedGridRow: {
-    boundingRect: {
-      top 
-    }, 
-    clickEventData: {
-      x 
+  gridEditor: {
+    selectedGridRow: {
+      boundingRect: {
+        top,
+        width,
+      }, 
+      clickEventData: {
+        x 
+      },
+      toolbar
     },
-    toolbar: {
-      display,
-    },
-  }, 
+    editForm,
+    gridContent,
+  },
   rowClicked,
   onLeaveGridRow,
-  toolbarEdit,
+  toolbarText,
   toolbarImage,
   toolbarVideo,
+  editFormChanged,
+  editFormSubmitted,
+  editFormCanceled,
 }) => (
   <Wrapper>
     <Title
       placeholder="enter a title"/>
     <GridWrapper>
-      {[0,1,2,3].map(() => (
-        <Row
-          onClick={rowClicked}/>
-      ))}
+      {gridContent.map(({rowType, rowStatus, rowContent}, key) => {
+        let content
+
+        if (rowType === TEXT) {
+          content = rowContent
+        }
+
+        return (
+          <Row
+            onClick={rowClicked.bind(this, key)}>
+              {content}
+            </Row>
+        )
+      })}
     </GridWrapper>
     <Toolbar
       top={top}
       left={x}
-      display={display}
+      display={toolbar.display}
       onMouseLeave={onLeaveGridRow}
-      toolbarEdit={toolbarEdit}
+      toolbarText={toolbarText}
       toolbarImage={toolbarImage}
       toolbarVideo={toolbarVideo}/>
+    <EditForm
+      display={editForm.display}
+      content={editForm.content}
+      windowWidth={width}
+      editFormChanged={editFormChanged}
+      editFormSubmitted={editFormSubmitted}
+      editFormCanceled={editFormCanceled}/>
   </Wrapper>
 )
 

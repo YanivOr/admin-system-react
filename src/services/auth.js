@@ -5,9 +5,7 @@ import {
   REDIRECT
 } from '../constants/router'
 
-export const authHeader = () => {
-  return `Bearer ${storageGet('token')}`
-}
+export const authHeader = () => `Bearer ${storageGet('token')}`
 
 export const fetchToken = ({search, pathname}) => {
   let routeState = INIT

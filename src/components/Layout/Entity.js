@@ -16,9 +16,12 @@ import {
 import {
   gridRowClicked,
   hideToolbar,
-  toolbarEdit,
+  toolbarText,
   toolbarImage,
   toolbarVideo,
+  editFormChanged,
+  editFormSubmitted,
+  editFormCanceled,
 } from '../../store/actions/entities/gridEditor/index'
 import { getAbsoluteBoundingRect } from '../../services/dom'
 import Board from '../Common/Board'
@@ -80,19 +83,27 @@ const Entity = ({entity}) => {
       {gridEditor.enabled &&
         <Board>
           <GridEditor
-            selectedGridRow={gridEditor.selectedGridRow}
-            rowClicked={(event) => dispatch(
-              gridRowClicked(entity, {
-                boundingRect: getAbsoluteBoundingRect(event.target),
-                clickEventData: {
-                  x: event.clientX,
-                  y: event.clientY,
+            gridEditor={gridEditor}
+            rowClicked={(index, event) => dispatch(
+              gridRowClicked(
+                entity, 
+                index, 
+                {
+                  boundingRect: getAbsoluteBoundingRect(event.target),
+                  clickEventData: {
+                    x: event.clientX,
+                    y: event.clientY,
+                  },
                 }
-              }))}
+              ))
+            }
             onLeaveGridRow={() => dispatch(hideToolbar(entity))}
-            toolbarEdit={() => dispatch(toolbarEdit(entity))}
+            toolbarText={() => dispatch(toolbarText(entity))}
             toolbarImage={() => dispatch(toolbarImage(entity))}
-            toolbarVideo={() => dispatch(toolbarVideo(entity))}/>
+            toolbarVideo={() => dispatch(toolbarVideo(entity))}
+            editFormChanged={(content) => dispatch(editFormChanged(entity, content))}
+            editFormSubmitted={() => dispatch(editFormSubmitted(entity))}
+            editFormCanceled={() => dispatch(editFormCanceled(entity))}/>
         </Board>
       }
       {form.enabled && 

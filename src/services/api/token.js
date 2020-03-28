@@ -6,15 +6,13 @@ const headers = {
   headers: { Authorization: authHeader() } 
 }
 
-export const  verifyToken = () => {
-  return new Promise((resolve, reject) => {
-    const req = axios.get(api.verifyToken, headers)
+export const  verifyToken = () => new Promise((resolve, reject) => {
+  const req = axios.get(api.verifyToken, headers)
 
-    req.then(({data}) => {
-      resolve(data)
-    })
-    .catch(({message}) => {
-      reject(message)
-    })
+  req.then(({data}) => {
+    resolve(data)
   })
-}
+  .catch(({message}) => {
+    reject(message)
+  })
+})

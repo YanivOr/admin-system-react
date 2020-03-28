@@ -1,3 +1,7 @@
+import {
+  BLANK,
+} from '../../../../constants/entities'
+
 const common = {
   table: {
     count: 0,
@@ -17,6 +21,7 @@ const common = {
   },
   gridEditor: {
     selectedGridRow: {
+      index: null,
       boundingRect: {
         bottom: 0,
         height: 0,
@@ -31,7 +36,25 @@ const common = {
       },
       toolbar: {
         display: false,
-      }
+      },
+    },
+    gridContent: [
+      {rowType: BLANK, rowStatus: null, rowContent: null},
+      {rowType: BLANK, rowStatus: null, rowContent: null},
+      {rowType: BLANK, rowStatus: null, rowContent: null},
+      {rowType: BLANK, rowStatus: null, rowContent: null},
+      {rowType: BLANK, rowStatus: null, rowContent: null},
+      {rowType: BLANK, rowStatus: null, rowContent: null},
+      {rowType: BLANK, rowStatus: null, rowContent: null},
+      {rowType: BLANK, rowStatus: null, rowContent: null},
+      {rowType: BLANK, rowStatus: null, rowContent: null},
+      {rowType: BLANK, rowStatus: null, rowContent: null},
+      {rowType: BLANK, rowStatus: null, rowContent: null},
+      {rowType: BLANK, rowStatus: null, rowContent: null},
+    ],
+    editForm: {
+      display: false,
+      content: '',
     },
   },
   rows: {},

@@ -1,6 +1,4 @@
-const isObject = (item) => {
-  return (item && typeof item === 'object' && !Array.isArray(item))
-}
+const isObject = (item) => (item && typeof item === 'object' && !Array.isArray(item))
 
 const mergeDeep = (target, source) => {
   let output = Object.assign({}, target)

@@ -20,6 +20,10 @@ import {
 import {
   GRID_ROW_CLICKED,
   HIDE_TOOLBAR,
+  TOOLBAR_EDIT,
+  EDIT_FORM_CHANGED,
+  EDIT_FORM_SUBMITTED,
+  EDIT_FORM_CANCELED,
 } from '../../actions/entities/gridEditor/types'
 import {
   getItemsSucceeded, 
@@ -42,6 +46,10 @@ import {
 import {
   gridRowClicked,
   hideToolbar,
+  toolbarText,
+  editFormChanged,
+  editFormSubmitted,
+  editFormCanceled,
 } from './main/gridEditor'
 
 const entities = (state = initialState, {type, entity, payload}) => {
@@ -68,6 +76,10 @@ const entities = (state = initialState, {type, entity, payload}) => {
     // GridEditor
     case GRID_ROW_CLICKED: return gridRowClicked(state, entity, payload)
     case HIDE_TOOLBAR: return hideToolbar(state, entity)
+    case TOOLBAR_EDIT: return toolbarText(state, entity, payload)
+    case EDIT_FORM_CHANGED: return editFormChanged(state, entity, payload)
+    case EDIT_FORM_SUBMITTED: return editFormSubmitted(state, entity, payload)
+    case EDIT_FORM_CANCELED: return editFormCanceled(state, entity, payload)
 
     default:
       return state

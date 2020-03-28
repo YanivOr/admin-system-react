@@ -23,17 +23,17 @@ const Wrapper = styled.div`
   }
 `
 
-const EditIcon = styled.img`
+const TextIcon = styled.img`
   width: 34px;
   height: 34px;
 `
 
-const UploadImage = styled.img`
+const ImageIcon = styled.img`
   width: 34px;
   height: 34px;
 `
 
-const ShareVideo = styled.img`
+const VideoIcon = styled.img`
   width: 34px;
   height: 34px;
 `
@@ -43,7 +43,7 @@ const Toolbar = ({
   left,
   display,
   onMouseLeave,
-  toolbarEdit,
+  toolbarText,
   toolbarImage,
   toolbarVideo,
 }) => (
@@ -52,13 +52,13 @@ const Toolbar = ({
     left={left}
     display={display}
     onMouseLeave={onMouseLeave}>
-      <EditIcon
+      <TextIcon
         src={require("../../../assets/create-24px.svg")}
-        onClick={toolbarEdit}/>
-      <UploadImage
+        onClick={toolbarText}/>
+      <ImageIcon
         src={require("../../../assets/insert_photo-24px.svg")}
         onClick={toolbarImage}/>
-      <ShareVideo
+      <VideoIcon
         src={require("../../../assets/videocam-24px.svg")}
         onClick={toolbarVideo}/>
   </Wrapper>
